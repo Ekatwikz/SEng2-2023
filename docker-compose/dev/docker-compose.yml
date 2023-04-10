@@ -1,0 +1,38 @@
+services:
+  mysql-store:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: dev_password
+      MYSQL_DATABASE: seng_dev
+    volumes:
+      - seng_dev_user_data:/var/lib/mysql
+
+  spring-boot-backend:
+    image: pw-2023-seng-dev-ekatwikz:latest
+    environment:
+      MYSQL_DB_NAME: seng_dev
+      MYSQL_PASSWORD: dev_password
+      MYSQL_STORENAME: mysql-store
+    build:
+      context: ../../backend
+      dockerfile: Dev.Dockerfile
+    ports:
+      - 8069:8080
+    volumes:
+      - ../../backend:/app/backend
+      - maven_local_repo:/root/.m2
+
+  next-frontend:
+    image: pw-2023-seng-frontend-dev-ekatwikz:latest
+    build:
+      context: ../../frontend
+      dockerfile: Dev.Dockerfile
+    ports:
+      - 3069:3000
+    volumes:
+      - ../../frontend:/app/frontend
+
+volumes:
+  seng_dev_user_data:
+  maven_local_repo:
+
