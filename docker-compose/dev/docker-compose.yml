@@ -31,8 +31,10 @@ services:
       - 3069:3000
     volumes:
       - ../../frontend:/app/frontend
+      - frontend_node_modules:/app/node_modules/
 
 volumes:
   seng_dev_user_data:
   maven_local_repo:
+  frontend_node_modules:
 
