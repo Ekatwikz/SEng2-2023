@@ -1,0 +1,39 @@
+# TODO: push these ones?
+# probably use env as well
+
+services:
+  mysql-store:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: deploy_password
+      MYSQL_DATABASE: seng_deploy
+    volumes:
+      - seng_dev_user_data:/var/lib/mysql
+
+  spring-boot-backend:
+    image: pw-2023-seng-dev-ekatwikz:latest
+    environment:
+      SPRING_PROFILES_ACTIVE: mysql-docker,jwt
+      MYSQL_DB_NAME: seng_deploy
+      MYSQL_PASSWORD: deploy_password
+      MYSQL_STORENAME: mysql-store
+    build:
+      context: ../../backend
+      dockerfile: Deploy.Dockerfile
+    volumes:
+      - maven_local_repo:/root/.m2
+
+  next-frontend:
+    image: pw-2023-seng-frontend-dev-ekatwikz:latest
+    build:
+      context: ../../frontend
+      dockerfile: Deploy.Dockerfile
+    ports:
+      - 80:3000
+    volumes:
+      - ../../frontend:/app/frontend
+
+volumes:
+  seng_dev_user_data:
+  maven_local_repo:
+
