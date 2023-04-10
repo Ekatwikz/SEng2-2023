@@ -7,11 +7,11 @@
 		<version>2.7.8</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>pw.react</groupId>
-	<artifactId>pw-2022-backend-starter</artifactId>
+	<groupId>ekatwikz.seng2023</groupId>
+	<artifactId>pw-2023-seng</artifactId>
 	<version>1.0.0</version>
-	<name>react-backend</name>
-	<description>Starter for the labs</description>
+	<name>project-backend</name>
+	<description>Software Engineering Group Project, Backend</description>
 
 	<properties>
 		<java.version>17</java.version>
@@ -126,35 +126,7 @@
 					</profiles>
 				</configuration>
 			</plugin>
-		    <plugin>
-		        <groupId>com.microsoft.azure</groupId>
-		        <artifactId>azure-spring-apps-maven-plugin</artifactId>
-		        <version>1.13.0</version>
-		        <configuration>
-		            <subscriptionId>47675a2c-e463-4a66-a735-d10183ef29f0</subscriptionId>
-		            <resourceGroup>myspringresgroup2</resourceGroup>
-		            <clusterName>springserviceflatly</clusterName>
-		            <appName>pw2022flatly</appName>
-		            <isPublic>true</isPublic>
-		            <deployment>
-		                <cpu>1</cpu>
-		                <memoryInGB>1</memoryInGB>
-		                <instanceCount>1</instanceCount>
-		                <runtimeVersion>Java 17</runtimeVersion>
-		                <resources>
-		                    <resource>
-		                        <filtering/>
-		                        <mergeId/>
-		                        <targetPath/>
-		                        <directory>${project.basedir}/target</directory>
-		                        <includes>
-		                            <include>*.jar</include>
-		                        </includes>
-		                    </resource>
-		                </resources>
-		            </deployment>
-		        </configuration>
-		    </plugin>
 		</plugins>
 	</build>
 </project>
+
