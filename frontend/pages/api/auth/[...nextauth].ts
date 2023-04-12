@@ -22,7 +22,7 @@ export default NextAuth({
           password: credentials?.password,
         };
 
-        const res = await fetch('http://spring-boot-backend:8080/logic/api/auth/login', {
+        const res = await fetch(`http://${process.env.BACKEND_NETWORK_NAME}:${process.env.BACKEND_NETWORK_PORT}/logic/api/auth/login`, {
           method: 'POST',
           body: JSON.stringify(payload),
           headers: {
