@@ -1,6 +1,7 @@
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
+// TODO: USE PROPER TYPESCRIPT IN THIS FILE!!
 export default NextAuth({
   providers: [
     CredentialsProvider({
@@ -17,8 +18,8 @@ export default NextAuth({
       },
       async authorize(credentials, req) {
         const payload = {
-          username: credentials.username,
-          password: credentials.password,
+          username: credentials?.username,
+          password: credentials?.password,
         };
 
         const res = await fetch('http://spring-boot-backend:8080/logic/api/auth/login', {
@@ -55,7 +56,7 @@ export default NextAuth({
       if (account && user) {
         return {
           ...token,
-          accessToken: user.token,
+          accessToken: user.token,/* ...?? */
           refreshToken: user.refreshToken,
         };
       }
@@ -64,9 +65,11 @@ export default NextAuth({
     },
 
     async session({ session, token }) {
-      session.user.accessToken = token.accessToken;
-      session.user.refreshToken = token.refreshToken;
-      session.user.accessTokenExpires = token.accessTokenExpires;
+      if (session.user) {
+        session.user.accessToken = token.accessToken;
+        session.user.refreshToken = token.refreshToken;
+        session.user.accessTokenExpires = token.accessTokenExpires;
+      }
 
       return session;
     },
@@ -81,3 +84,4 @@ export default NextAuth({
   // Enable debug messages in the console if you are having problems
   debug: process.env.NODE_ENV === 'development',
 });
+
