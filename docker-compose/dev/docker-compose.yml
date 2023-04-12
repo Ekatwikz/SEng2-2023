@@ -13,6 +13,7 @@ services:
       MYSQL_DB_NAME: seng_dev
       MYSQL_PASSWORD: dev_password
       MYSQL_STORENAME: mysql-store
+      SERVER_PORT: 8080
     build:
       context: ../../backend
       dockerfile: Dev.Dockerfile
@@ -24,17 +25,18 @@ services:
 
   next-frontend:
     image: pw-2023-seng-frontend-dev-ekatwikz:latest
+    environment:
+      BACKEND_NETWORK_NAME: spring-boot-backend
+      BACKEND_NETWORK_PORT: 8080
     build:
       context: ../../frontend
       dockerfile: Dev.Dockerfile
     ports:
-      - 3069:3000
+      - 3069:3069
     volumes:
       - ../../frontend:/app/frontend
-      - frontend_node_modules:/app/node_modules/
 
 volumes:
   seng_dev_user_data:
   maven_local_repo:
-  frontend_node_modules:
 

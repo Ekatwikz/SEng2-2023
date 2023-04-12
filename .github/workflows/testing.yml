@@ -2,14 +2,36 @@ name: Repo Tests
 run-name: Running Tests on ${{ github.actor }}'s ${{ github.event_name }} to ${{ github.ref_name }}
 on: [push]
 jobs:
-  build:
+  backend-tests:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
-      - name: Compose tests
+      - name: Docker-Compose Backend Tests
         uses: isbang/compose-action@v1.4.1
         with:
           up-flags: "--build --abort-on-container-exit"
           compose-file: "./docker-compose/testing/docker-compose.yml"
+  frontend-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        working-directory: ./frontend
+        run: npm ci
+      - name: Lint Frontend
+        working-directory: ./frontend
+        run: npm run lint
+  frontend-typecheck: # Repititive... ??
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        working-directory: ./frontend
+        run: npm ci
+      - name: Typecheck Frontend
+        working-directory: ./frontend
+        run: npm run typecheck
 
