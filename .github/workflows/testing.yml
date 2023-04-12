@@ -12,4 +12,26 @@ jobs:
         with:
           up-flags: "--build --abort-on-container-exit"
           compose-file: "./docker-compose/testing/docker-compose.yml"
+  frontend-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        working-directory: ./frontend
+        run: npm ci
+      - name: Lint Frontend
+        working-directory: ./frontend
+        run: npm run lint
+  frontend-typecheck: # Repititive... ??
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        working-directory: ./frontend
+        run: npm ci
+      - name: Typecheck Frontend
+        working-directory: ./frontend
+        run: npm run typecheck
 
