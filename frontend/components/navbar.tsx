@@ -1,10 +1,10 @@
-import FlightTakeoffOutlinedIcon from '@mui/icons-material/FlightTakeoffOutlined';
-import { Avatar, Tab, Tabs } from '@mui/material';
-import Link from 'next/link';
+import FlightTakeoffOutlinedIcon from "@mui/icons-material/FlightTakeoffOutlined";
+import { Avatar, Tab, Tabs } from "@mui/material";
+import Link from "next/link";
 
 const Navbar = () => (
     <nav>
-        <Avatar className='logo' sx={{ m: 1, bgcolor: 'primary.main' }}>
+        <Avatar className='logo' sx={{ m: 1, bgcolor: "primary.main" }}>
             <FlightTakeoffOutlinedIcon />
         </Avatar>
 
@@ -26,6 +26,6 @@ const Navbar = () => (
             </Link>
         </Tabs>
     </nav>
-)
+);
 
 export default Navbar;

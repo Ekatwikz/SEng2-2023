@@ -1,7 +1,7 @@
 import Footer from "./footer";
 import Navbar from "./navbar";
 
-import { Box, Container, CssBaseline } from '@mui/material';
+import { Box, Container, CssBaseline } from "@mui/material";
 
 const Layout = ({ children }:
     {
@@ -10,9 +10,9 @@ const Layout = ({ children }:
     return (
         <Box
             sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                minHeight: '100vh',
+                display: "flex",
+                flexDirection: "column",
+                minHeight: "100vh",
             }}
         >
             <CssBaseline />
@@ -25,9 +25,9 @@ const Layout = ({ children }:
                 sx={{
                     py: 3,
                     px: 2,
-                    mt: 'auto',
+                    mt: "auto",
                     backgroundColor: (theme) =>
-                        theme.palette.mode === 'light'
+                        theme.palette.mode === "light"
                             ? theme.palette.grey[200]
                             : theme.palette.grey[800],
                 }}
@@ -38,6 +38,6 @@ const Layout = ({ children }:
             </Box>
         </Box>
     );
-}
+};
 
 export default Layout;

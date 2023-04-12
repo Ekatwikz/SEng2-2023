@@ -1,19 +1,21 @@
-import NextAuth from 'next-auth';
-import CredentialsProvider from 'next-auth/providers/credentials';
+import NextAuth from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
 
 // TODO: USE PROPER TYPESCRIPT IN THIS FILE!!
+
+/* eslint new-cap: 0 */ // JUST for this file, since the functions are external!
 export default NextAuth({
   providers: [
     CredentialsProvider({
-      name: 'seng-project-backend',
+      name: "seng-project-backend",
       credentials: {
         username: {
-          label: 'username',
-          type: 'text',
+          label: "username",
+          type: "text",
         },
         password: {
-          label: 'Password',
-          type: 'password'
+          label: "Password",
+          type: "password"
         }
       },
       async authorize(credentials, req) {
@@ -23,10 +25,10 @@ export default NextAuth({
         };
 
         const res = await fetch(`http://${process.env.BACKEND_NETWORK_NAME}:${process.env.BACKEND_NETWORK_PORT}/logic/api/auth/login`, {
-          method: 'POST',
+          method: "POST",
           body: JSON.stringify(payload),
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
         });
 
@@ -48,7 +50,7 @@ export default NextAuth({
 
   secret: process.env.JWT_SECRET,
   pages: {
-    signIn: '/login',
+    signIn: "/login",
   },
 
   callbacks: {
@@ -57,7 +59,7 @@ export default NextAuth({
         return {
           ...token,
           accessToken: token, // ??
-          refreshToken: user.refreshToken, //  ??
+          //refreshToken: user.refreshToken, //  ??
         };
       }
 
@@ -66,9 +68,9 @@ export default NextAuth({
 
     async session({ session, token }) {
       if (session.user) {
-        session.user.accessToken = token.accessToken; // ??
-        session.user.refreshToken = token.refreshToken; // ??
-        session.user.accessTokenExpires = token.accessTokenExpires; // ??
+        //session.user.accessToken = token.accessToken; // ??
+        //session.user.refreshToken = token.refreshToken; // ??
+        //session.user.accessTokenExpires = token.accessTokenExpires; // ??
       }
 
       return session;
@@ -76,12 +78,12 @@ export default NextAuth({
   },
 
   theme: {
-    colorScheme: 'auto', // "auto" | "dark" | "light"
-    brandColor: '', // Hex color code #33FF5D
-    logo: '/logo.png', // Absolute URL to image
+    colorScheme: "auto", // "auto" | "dark" | "light"
+    brandColor: "", // Hex color code #33FF5D
+    logo: "/logo.png", // Absolute URL to image
   },
 
   // Enable debug messages in the console if you are having problems
-  debug: process.env.NODE_ENV === 'development',
+  debug: process.env.NODE_ENV === "development",
 });
 
