@@ -13,16 +13,16 @@ const Navbar = () => (
             indicatorColor="secondary"
         >
             <Link href="/">
-                <Tab value="two" label="Home" />
+                <Tab label="Home" />
             </Link>
             <Link href="/profile">
-                <Tab value="one" label="Profile" />
+                <Tab label="Profile" />
             </Link>
             <Link href="/login">
-                <Tab value="three" label="Login" />
+                <Tab label="Login" />
             </Link>
             <Link href=""> { /* TODO, also remove disable */ }
-                <Tab value="one" label="Register" disabled />
+                <Tab label="Register" disabled />
             </Link>
         </Tabs>
     </nav>

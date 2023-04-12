@@ -11,31 +11,31 @@ export default function About() {
   return (
     <Container component="main" maxWidth="xs">
       <Card elevation={6} sx={{
-        padding: 5,
+        padding: 4,
         borderRadius: 4
       }}>
         {session ?
           <Box
             sx={{
-              marginTop: 8,
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
               justifyContent: 'space-around'
             }}
           >
-            <Typography component="h1" variant="h5">
+            <Typography component="h1" variant="h5" sx={{
+              mb: 3
+            }}>
               Welcome, {session.user?.email}!
             </Typography>
             <Alert severity="warning" sx={{
-              m: 3,
+              mb: 3,
               borderRadius: 2
             }}>
               TODO: Flesh out this page
             </Alert>
             <Button variant="contained"
               fullWidth
-              sx={{ mt: 1, mb: 2 }}
               onClick={() => {
                 signOut({
                   redirect: false

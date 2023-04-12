@@ -20,7 +20,7 @@ export default function App({ Component,
   return (
     <SessionProvider session={session}>
       <ThemeProvider theme={theme}>
-        <SnackbarProvider>
+        <SnackbarProvider maxSnack={2}>
           <Layout>
             <CssBaseline />
             <Component {...pageProps} />
