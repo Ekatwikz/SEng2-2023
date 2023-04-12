@@ -2,12 +2,12 @@ name: Repo Tests
 run-name: Running Tests on ${{ github.actor }}'s ${{ github.event_name }} to ${{ github.ref_name }}
 on: [push]
 jobs:
-  build:
+  backend-tests:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
-      - name: Compose tests
+      - name: Docker-Compose Backend Tests
         uses: isbang/compose-action@v1.4.1
         with:
           up-flags: "--build --abort-on-container-exit"
