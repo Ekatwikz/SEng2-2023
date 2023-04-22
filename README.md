@@ -10,7 +10,23 @@ NB: For development and/or testing, you'll want [WSL2](https://learn.microsoft.c
 ```
 clear && ./docker-helper dev
 ```
+or (if above does not work)
+
+```
+clear && ./docker-helper.sh dev
+```
+
+### IF you get 'Connection denied' or 'Connection refused' error
+- [Add your user to docker group and try again](https://stackoverflow.com/a/65240108)
+
 - Open http://localhost:3069 in your browser
+
+### IF you get 'Error: EACCES: permission denied, unlink ...'
+- [Try following](https://github.com/vercel/next.js/issues/8908) it helped me:
+
+```
+sudo chown -R $USER <project-dir>
+```
 
 - Press Ctrl+C when you're done, my helper script takes care of cleaning up the containers
 
