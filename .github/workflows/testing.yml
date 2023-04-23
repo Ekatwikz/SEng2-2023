@@ -2,7 +2,32 @@ name: Repo Tests
 run-name: Running Tests on ${{ github.actor }}'s ${{ github.event_name }} to ${{ github.ref_name }}
 on: [push]
 jobs:
+  paths-filter: # Don't need to run every test job on every push... ?
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+    outputs:
+      should-test-backend: ${{ steps.filter.outputs.should-test-backend }}
+      should-lint-frontend: ${{ steps.filter.outputs.should-lint-frontend }}
+      docker-compose-changed: ${{ steps.filter.outputs.docker-compose-changed }}
+    steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v3
+    - name: Filter Paths to Test
+      uses: dorny/paths-filter@v2
+      id: filter
+      with:
+        filters: |
+          should-test-backend:
+            - 'backend/**'
+          should-lint-frontend:
+            - 'frontend/**'
+          docker-compose-changed:
+            - 'docker-compose/**'
   backend-tests:
+    needs: paths-filter
+    if: ${{ needs.paths-filter.outputs.should-test-backend == 'true' || needs.paths-filter.outputs.docker-compose-changed == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
@@ -13,6 +38,8 @@ jobs:
           up-flags: "--build --abort-on-container-exit"
           compose-file: "./docker-compose/testing/docker-compose.yml"
   frontend-lint:
+    needs: paths-filter
+    if: ${{ needs.paths-filter.outputs.should-lint-frontend == 'true' || needs.paths-filter.outputs.docker-compose-changed == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
@@ -24,6 +51,8 @@ jobs:
         working-directory: ./frontend
         run: npm run lint
   frontend-typecheck: # Repititive... ??
+    needs: paths-filter
+    if: ${{ needs.paths-filter.outputs.should-lint-frontend == 'true' || needs.paths-filter.outputs.docker-compose-changed == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
