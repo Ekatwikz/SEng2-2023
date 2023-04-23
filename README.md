@@ -8,8 +8,9 @@ NB: For development and/or testing, you'll want [WSL2](https://learn.microsoft.c
 - [Open a terminal in the current folder](https://www.google.com/search?q=how+to+open+a+terminal+in+current+folder) (WSL2 if Windows)
 - Ctrl+C, Ctrl+V, Enter:
 ```
-clear && ./docker-helper dev
+clear && ./docker-helper.sh dev
 ```
+
 - Open http://localhost:3069 in your browser
 
 - Press Ctrl+C when you're done, my helper script takes care of cleaning up the containers
@@ -20,13 +21,21 @@ You can nuke it using [`docker volume rm [...]`](https://docs.docker.com/engine/
 ## Testing
 ### Backend
 - Intall docker, open terminal, etcetc
-- Copy-Paste and Run:
+- Ctrl+C, Ctrl+V, Enter:
 ```
-clear && ./docker-helper testing
+clear && ./docker-helper.sh testing
 ```
 
 Backend tests' source are in ./backend/src/test/java/pw/react/backend
 
 ### Frontend
 TODO!
+
+## 'Connection denied' or 'Connection refused' error when starting the script:
+- [Add your user to docker group](https://stackoverflow.com/a/65240108) and try again:
+```
+sudo gpasswd -a $USER docker # Add yourself to the docker group
+newgrp docker # Log in to the group
+clear && ./docker-helper.sh [...] # Retry
+```
 
