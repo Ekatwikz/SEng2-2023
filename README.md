@@ -8,11 +8,6 @@ NB: For development and/or testing, you'll want [WSL2](https://learn.microsoft.c
 - [Open a terminal in the current folder](https://www.google.com/search?q=how+to+open+a+terminal+in+current+folder) (WSL2 if Windows)
 - Ctrl+C, Ctrl+V, Enter:
 ```
-clear && ./docker-helper dev
-```
-or (if above does not work)
-
-```
 clear && ./docker-helper.sh dev
 ```
 
@@ -31,7 +26,7 @@ You can nuke it using [`docker volume rm [...]`](https://docs.docker.com/engine/
 - Intall docker, open terminal, etcetc
 - Copy-Paste and Run:
 ```
-clear && ./docker-helper testing
+clear && ./docker-helper.sh testing
 ```
 
 Backend tests' source are in ./backend/src/test/java/pw/react/backend
