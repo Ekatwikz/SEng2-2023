@@ -11,9 +11,6 @@ NB: For development and/or testing, you'll want [WSL2](https://learn.microsoft.c
 clear && ./docker-helper.sh dev
 ```
 
-### IF you get 'Connection denied' or 'Connection refused' error
-- [Add your user to docker group and try again](https://stackoverflow.com/a/65240108)
-
 - Open http://localhost:3069 in your browser
 
 - Press Ctrl+C when you're done, my helper script takes care of cleaning up the containers
@@ -33,4 +30,12 @@ Backend tests' source are in ./backend/src/test/java/pw/react/backend
 
 ### Frontend
 TODO!
+
+## 'Connection denied' or 'Connection refused' error when starting the script:
+- [Add your user to docker group](https://stackoverflow.com/a/65240108) and try again:
+```
+sudo gpasswd -a $USER docker # Add yourself to the docker group
+newgrp docker # Log in to the group
+clear && ./docker-helper.sh [...] # Retry
+```
 
