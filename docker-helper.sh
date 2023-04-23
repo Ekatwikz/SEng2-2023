@@ -9,7 +9,7 @@ dev() {
 	printf "(Remember, you can live edit using this environment,\n"
 	printf "There SHOULD be no need to restart the containers!)\n\n"
 
-	trap "cleanup_containers" INT
+	trap "cleanup_containers" TERM INT QUIT HUP
 	docker-compose up -d --build
 	docker-compose logs -f
 }
@@ -18,7 +18,7 @@ testing() {
 	cd "$STARTDIR/docker-compose/testing" || err_msg "Couldn't find testing folder??"
 	printf "Starting test containers...\n\n"
 
-	trap "cleanup_containers" INT
+	trap "cleanup_containers" TERM INT QUIT HUP
 	docker-compose up --abort-on-container-exit --build
 	cleanup_containers
 }
