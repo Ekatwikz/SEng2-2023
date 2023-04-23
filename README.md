@@ -21,13 +21,6 @@ clear && ./docker-helper.sh dev
 
 - Open http://localhost:3069 in your browser
 
-### IF you get 'Error: EACCES: permission denied, unlink ...'
-- [Try following](https://github.com/vercel/next.js/issues/8908) it helped me:
-
-```
-sudo chown -R $USER <project-dir>
-```
-
 - Press Ctrl+C when you're done, my helper script takes care of cleaning up the containers
 
 NB: the database's volume is persistent  
