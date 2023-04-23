@@ -24,7 +24,7 @@ You can nuke it using [`docker volume rm [...]`](https://docs.docker.com/engine/
 ## Testing
 ### Backend
 - Intall docker, open terminal, etcetc
-- Copy-Paste and Run:
+- Ctrl+C, Ctrl+V, Enter:
 ```
 clear && ./docker-helper.sh testing
 ```
