@@ -51,9 +51,31 @@ class HttpRequestTests {
     }
 
 	// @Test
-    // public void loginShouldWork() {
-	// 	// TODO
-	// }
+    public void loginShouldWork() {
+		    // Create a user for testing
+		    User newUser = new User();
+		    newUser.setUsername("testUser");
+		    newUser.setPassword("testPassword");
+		    newUser.setEmail("test@example.com");
+
+		    // Register the user first
+		    LoginResponse registrationResponse = restTemplate.postForObject(
+			    String.format("%s/users", baseUrl),
+			    newUser,
+			    LoginResponse.class
+    );
+	    assertThat(registrationResponse).isNotNull();
+
+	    // Perform login
+	    LoginResponse loginResponse = restTemplate.postForObject(
+		    String.format("%s/login", baseUrl),
+		    newUser,
+		    LoginResponse.class
+	    );
+	    assertThat(loginResponse).isNotNull();
+	    assertThat(loginResponse.getToken()).isNotBlank();
+	    assertThat(loginResponse.getUsername()).isEqualTo(newUser.getUsername());
+    }
 
 	// @Test
     // public void bookingCreationShouldWork() {
