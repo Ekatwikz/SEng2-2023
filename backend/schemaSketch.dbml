@@ -1,0 +1,46 @@
+aircrafts {
+	aircraft_id bigint pk increments
+	aircraft_name varchar
+	aircraft_description varchar
+	aircraft_registration varchar
+	aircraft_type varchar
+}
+
+aircraft_images {
+	aircraft_image_id bigint pk increments
+	data longblob
+	aircraft_id bigint > aircrafts.aircraft_id
+
+	file_name varchar
+	file_size bigint
+	file_type varchar
+}
+
+bookings {
+	booking_id bigint pk increments
+	booking_start_date_time datetime
+	booking_end_date_time datetime
+	aircraft_id bigint > aircrafts.aircraft_id
+}
+
+users {
+	id bigint pk increments
+	email varchar
+	password varchar
+	username varchar
+	first_name varchar
+	last_name varchar
+}
+
+certificates {
+	certificate_id bigint pk increments
+	certificate_name varchar
+	expiry_date datetime
+	certificate_file longblob
+	owner_id bigint > users.id
+
+	file_name varchar
+	file_size bigint
+	file_type varchar
+}
+
