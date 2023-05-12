@@ -11,9 +11,9 @@ services:
       - seng_dev_user_data:/var/lib/mysql
     healthcheck:
       test: mysqladmin ping -h localhost -u root --password=$$MYSQL_ROOT_PASSWORD
-      interval: 5s
+      interval: 2s
       timeout: 5s
-      retries: 15
+      retries: 40
 
   spring-boot-backend:
     image: pw-2023-seng-dev-ekatwikz:latest

@@ -6,9 +6,9 @@ services:
       MYSQL_DATABASE: seng_testing
     healthcheck: # SO ftw? https://stackoverflow.com/a/54854239
       test: mysqladmin ping -h localhost -u root --password=$$MYSQL_ROOT_PASSWORD
-      interval: 5s
+      interval: 2s
       timeout: 5s
-      retries: 15
+      retries: 40
 
   spring-boot-backend:
     image: pw-2023-seng-testing-ekatwikz:latest
