@@ -19,66 +19,66 @@ import pw.react.backend.models.User;
 @SpringBootTest
 @AutoConfigureMockMvc
 public class MockMvcTests {
-	@Autowired
-	private MockMvc mockMvc;
+    @Autowired
+    private MockMvc mockMvc;
 
-	private String baseUrl = "/logic/api";
+    private final String baseUrl = "/logic/api";
 
     @Test
     public void registrationShouldReturnValidResponse() throws Exception {
-		// Setup Dto
-		User newUser = new User();
-		newUser.setUsername(String.format("TESTING_%s", System.currentTimeMillis()));
-		newUser.setPassword("testing");
-		newUser.setEmail("testing@example.com");
+	// Setup Dto
+	final User newUser = new User();
+	newUser.setUsername(String.format("TESTING_%s", System.currentTimeMillis()));
+	newUser.setPassword("testing");
+	newUser.setEmail("testing@example.com");
 
-		// POST Dto and assert that the response is as expected
-        mockMvc.perform(post(baseUrl + "/users")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(new ObjectMapper().writeValueAsString(newUser)))
-                .andExpect(status().isCreated())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.username").value(newUser.getUsername()))
-                .andExpect(jsonPath("$.email").value(newUser.getEmail()));
+	// POST Dto and assert that the response is as expected
+	mockMvc.perform(post(baseUrl + "/users")
+	    .contentType(MediaType.APPLICATION_JSON)
+	    .content(new ObjectMapper().writeValueAsString(newUser)))
+	    .andExpect(status().isCreated())
+	    .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+	    .andExpect(jsonPath("$.username").value(newUser.getUsername()))
+	    .andExpect(jsonPath("$.email").value(newUser.getEmail()));
     }
 
-	// @Test
+    // @Test
     // public void loginShouldWork() {
-	// 	// TODO
-	// }
+    // 	// TODO
+    // }
 
-	// @Test
+    // @Test
     // public void bookingCreationShouldWork() {
-	// 	// TODO
-	// }
+    // 	// TODO
+    // }
 
-	// @Test
+    // @Test
     // public void bookingUpdatesShouldWork() {
-	// 	// TODO
-	// }
+    // 	// TODO
+    // }
 
-	// @Test
+    // @Test
     // public void certificateCreationShouldWork() {
-	// 	// TODO
-	// }
+    // 	// TODO
+    // }
 
-	// @Test
+    // @Test
     // public void certificateRetrievalShouldWork() {
-	// 	// TODO
-	// }
+    // 	// TODO
+    // }
 
-	// @Test
+    // @Test
     // public void aircraftCreationShouldWork() {
-	// 	// TODO
-	// }
+    // 	// TODO
+    // }
 
-	// @Test
+    // @Test
     // public void aircraftRetrievalShouldWork() {
-	// 	// TODO
-	// }
+    // 	// TODO
+    // }
 
-	// @Test
+    // @Test
     // public void aircraftRetrievalByTimeRangeShouldWork() {
-	// 	// TODO
-	// }
+    // 	// TODO
+    // }
 }

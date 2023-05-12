@@ -19,23 +19,23 @@ import pw.react.backend.web.LoginResponse;
 @ActiveProfiles(profiles = {"mysql-docker-dev", "jwt"})
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 class HttpRequestTests {
-	@LocalServerPort
-	private int port;
+    @LocalServerPort
+    private int port;
 
-	@Autowired
+    @Autowired
     private TestRestTemplate restTemplate;
 
-	private String baseUrl;
+    private String baseUrl;
     @BeforeEach
     public void setUp() {
-        baseUrl = "http://localhost:" + port + "/logic/api/";
+	baseUrl = "http://localhost:" + port + "/logic/api/";
     }
 
-	@Test
+    @Test
     public void usersEndpointIsUpAndRequiresAuth() {
-		// basic af smoke test, if this fails nothing should work tbh
-        ResponseEntity<?> response = restTemplate.getForEntity(String.format("%s/users", baseUrl), Object.class);
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.UNAUTHORIZED);
+	// basic af smoke test, if this fails nothing should work tbh
+	final ResponseEntity<?> response = restTemplate.getForEntity(String.format("%s/users", baseUrl), Object.class);
+	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.UNAUTHORIZED);
     }
 
     @Test
@@ -50,43 +50,43 @@ class HttpRequestTests {
 		assertThat(response instanceof LoginResponse);
     }
 
-	// @Test
+    // @Test
     // public void loginShouldWork() {
-	// 	// TODO
-	// }
+    // 	// TODO
+    // }
 
-	// @Test
+    // @Test
     // public void bookingCreationShouldWork() {
-	// 	// TODO
-	// }
+    // 	// TODO
+    // }
 
-	// @Test
+    // @Test
     // public void bookingUpdatesShouldWork() {
-	// 	// TODO
-	// }
+    // 	// TODO
+    // }
 
-	// @Test
+    // @Test
     // public void certificateCreationShouldWork() {
-	// 	// TODO
-	// }
+    // 	// TODO
+    // }
 
-	// @Test
+    // @Test
     // public void certificateRetrievalShouldWork() {
-	// 	// TODO
-	// }
+    // 	// TODO
+    // }
 
-	// @Test
+    // @Test
     // public void aircraftCreationShouldWork() {
-	// 	// TODO
-	// }
+    // 	// TODO
+    // }
 
-	// @Test
+    // @Test
     // public void aircraftRetrievalShouldWork() {
-	// 	// TODO
-	// }
+    // 	// TODO
+    // }
 
-	// @Test
+    // @Test
     // public void aircraftRetrievalByTimeRangeShouldWork() {
-	// 	// TODO
-	// }
+    // 	// TODO
+    // }
 }
