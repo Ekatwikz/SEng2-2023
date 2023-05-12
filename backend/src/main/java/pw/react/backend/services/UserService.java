@@ -53,6 +53,16 @@ public class UserService implements IUserService {
                 log.error("UEmpty email.");
                 throw new UserValidationException("Empty email.");
             }
+
+            if (!isValid(user.getFirstName())) {
+                log.error("UEmpty firstName.");
+                throw new UserValidationException("Empty firstName.");
+            }
+            if (!isValid(user.getLastName())) {
+                log.error("UEmpty lastName.");
+                throw new UserValidationException("Empty lastName.");
+            }
+
             return true;
         }
         log.error("User is null.");
