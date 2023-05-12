@@ -2,12 +2,13 @@ package pw.react.backend.models;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Set;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -19,16 +20,17 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column
-    private String username;
 
-    @Column
+    private String username;
     private String password;
-    @Column
     private String email;
 
     private String firstName;
     private String lastName;
+
+    @OneToMany(mappedBy = "owner")
+    private Set<Certificate> certificates;
+
     public String getFirstName() {
         return firstName;
     }
@@ -49,7 +51,7 @@ public class User implements UserDetails {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 
@@ -63,11 +65,11 @@ public class User implements UserDetails {
         return username;
     }
 
-    public void setUsername(String username) {
+    public void setUsername(final String username) {
         this.username = username;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(final String password) {
         this.password = password;
     }
 
@@ -75,7 +77,7 @@ public class User implements UserDetails {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(final String email) {
         this.email = email;
     }
 
@@ -104,8 +106,11 @@ public class User implements UserDetails {
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "User [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email + "]";
+    public Set<Certificate> getCertificates() {
+        return certificates;
+    }
+
+    public void setCertificates(Set<Certificate> certificates) {
+        this.certificates = certificates;
     }
 }
