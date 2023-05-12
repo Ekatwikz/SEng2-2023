@@ -45,6 +45,8 @@ class HttpRequestTests {
 	final User newUser = new User();
 	newUser.setUsername(String.format("TESTING_%s", System.currentTimeMillis()));
 	newUser.setPassword("testing");
+	newUser.setFirstName("testing_firstname");
+	newUser.setLastName("testing_lastname");
 	newUser.setEmail("testing@example.com");
 
 	final ResponseEntity<UserDto> response = restTemplate.exchange(
@@ -64,6 +66,8 @@ class HttpRequestTests {
 
 	assertThat(responseBody.email()).isEqualTo(newUser.getEmail());
 	assertThat(responseBody.username()).isEqualTo(newUser.getUsername());
+	assertThat(responseBody.firstName()).isEqualTo(newUser.getFirstName());
+	assertThat(responseBody.lastName()).isEqualTo(newUser.getLastName());
     }
 
     // @Test

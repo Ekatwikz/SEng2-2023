@@ -30,6 +30,8 @@ public class MockMvcTests {
 	final User newUser = new User();
 	newUser.setUsername(String.format("TESTING_%s", System.currentTimeMillis()));
 	newUser.setPassword("testing");
+	newUser.setFirstName("testing_firstname");
+	newUser.setLastName("testing_lastname");
 	newUser.setEmail("testing@example.com");
 
 	// POST Dto and assert that the response is as expected
@@ -39,7 +41,9 @@ public class MockMvcTests {
 	    .andExpect(status().isCreated())
 	    .andExpect(content().contentType(MediaType.APPLICATION_JSON))
 	    .andExpect(jsonPath("$.username").value(newUser.getUsername()))
-	    .andExpect(jsonPath("$.email").value(newUser.getEmail()));
+	    .andExpect(jsonPath("$.email").value(newUser.getEmail()))
+	    .andExpect(jsonPath("$.firstName").value(newUser.getFirstName()))
+	    .andExpect(jsonPath("$.lastName").value(newUser.getLastName()));
     }
 
     // @Test
