@@ -4,6 +4,11 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: test_password
       MYSQL_DATABASE: seng_testing
+    healthcheck: # SO ftw? https://stackoverflow.com/a/54854239
+      test: mysqladmin ping -h localhost -u root --password=$$MYSQL_ROOT_PASSWORD
+      interval: 2s
+      timeout: 5s
+      retries: 40
 
   spring-boot-backend:
     image: pw-2023-seng-testing-ekatwikz:latest
@@ -15,6 +20,14 @@ services:
     build:
       context: ../../backend
       dockerfile: Testing.Dockerfile
+    volumes:
+      - maven_local_repo:/root/.m2 # only affects local testing...?
+    depends_on:
+      mysql-store:
+        condition: service_healthy
 
   # TODO: frontend tests: selenium? jest? something else? get it done.
+
+volumes:
+  maven_local_repo:
 

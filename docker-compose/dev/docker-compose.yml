@@ -6,6 +6,11 @@ services:
       MYSQL_DATABASE: seng_dev
     volumes:
       - seng_dev_user_data:/var/lib/mysql
+    healthcheck:
+      test: mysqladmin ping -h localhost -u root --password=$$MYSQL_ROOT_PASSWORD
+      interval: 2s
+      timeout: 5s
+      retries: 40
 
   spring-boot-backend:
     image: pw-2023-seng-dev-ekatwikz:latest
@@ -22,6 +27,10 @@ services:
     volumes:
       - ../../backend:/app/backend
       - maven_local_repo:/root/.m2
+    depends_on:
+      mysql-store:
+        condition: service_healthy
+    # TODO: backend healthcheck
 
   next-frontend:
     image: pw-2023-seng-frontend-dev-ekatwikz:latest
@@ -35,6 +44,8 @@ services:
       - 3069:3069
     volumes:
       - ../../frontend:/app/frontend
+    depends_on:
+      - spring-boot-backend
 
 volumes:
   seng_dev_user_data:
