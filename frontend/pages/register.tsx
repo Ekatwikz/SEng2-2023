@@ -1,15 +1,26 @@
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-
 import { Avatar, Box, Button, Card, Container, Grid, Link, TextField, Typography } from "@mui/material";
-
-import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
-
 import { useSnackbar } from "notistack";
 
-// Adjusted template from: https://github.com/mui/material-ui/tree/v5.12.0/docs/data/material/getting-started/templates/sign-in
+import { auth } from "./api/auth/register";
+import { signIn } from "next-auth/react";
 
-export default function SignIn() {
+export class RegisterData {
+    email: string;
+    username: string;
+    password: string;
+    passwordRep: string;
+
+    constructor(email: string, username: string, password: string, passwordRep: string) {
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.passwordRep = passwordRep;
+    }
+}
+
+export default function Register() {
   const { enqueueSnackbar } = useSnackbar();
   const router = useRouter();
 
@@ -17,26 +28,25 @@ export default function SignIn() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
-    const result = await signIn("credentials", {
-      username: data.get("username"),
-      password: data.get("password"),
-      redirect: false
-    });
+    const result = new RegisterData(
+      data.get("email")!.toString(),
+      data.get("username")!.toString(),
+      data.get("password")!.toString(),
+      data.get("passwordRep")!.toString(),
+    );
 
-    // TODO: move this somewhere else!!!!
-    // UI should not be concerned with bizwax
-    if (!result || result.error || result.status !== 200) {
-      // Handle authentication error
-      console.error(result); // TODO: Replace with (or add) "login failed message/popup" or something
-
-      enqueueSnackbar("Login Failed [Example Snack, Y'all can remove]", {
-        key: "loginFail",
-        variant: "error"
-      });
+    if (await auth(result)) {
+        await signIn("credentials", {
+            username: result.username,
+            password: result.password,
+            redirect: false
+          });
+        router.push("/profile");
     } else {
-      // Handle successful authentication
-      console.log(result);
-      router.push("/profile");
+        enqueueSnackbar("Registration Failed", {
+            key: "registerFail",
+            variant: "error"
+          });
     }
   };
 
@@ -56,11 +66,11 @@ export default function SignIn() {
           <Box sx={{
             m: 5
           }}>
-            <Avatar sx={{ m: 1, ml: 2, bgcolor: "secondary.main" }}>
+            <Avatar sx={{ m: 1, ml: 3, bgcolor: "secondary.main" }}>
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Log In
+              Register
             </Typography>
           </Box>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
@@ -68,10 +78,18 @@ export default function SignIn() {
               margin="normal"
               required
               fullWidth
+              id="email"
+              label="Email"
+              name="email"
+              type="email"
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
               id="username"
               label="Username"
               name="username"
-              autoComplete="username"
             />
             <TextField
               margin="normal"
@@ -81,7 +99,15 @@ export default function SignIn() {
               label="Password"
               type="password"
               id="password"
-              autoComplete="current-password"
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="passwordRep"
+              label="Repeat Password"
+              type="password"
+              id="passwordRep"
             />
             <Button
               type="submit"
@@ -89,13 +115,13 @@ export default function SignIn() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Log In
+              Register
             </Button>
 
             <Grid container>
               <Grid item>
-                <Link href="/register" variant="body2">
-                  {"Don't have an account? Register!"}
+                <Link href="/login" variant="body2">
+                  {"Already have an account? Log In"}
                 </Link>
               </Grid>
             </Grid>

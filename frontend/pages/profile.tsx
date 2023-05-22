@@ -23,17 +23,7 @@ export default function About() {
               justifyContent: "space-around"
             }}
           >
-            <Typography component="h1" variant="h5" sx={{
-              mb: 3
-            }}>
-              Welcome, {session.user?.email}!
-            </Typography>
-            <Alert severity="warning" sx={{
-              mb: 3,
-              borderRadius: 2
-            }}>
-              TODO: Flesh out this page
-            </Alert>
+            {/* Display user info */}
             <Button variant="contained"
               fullWidth
               onClick={() => {
@@ -48,13 +38,7 @@ export default function About() {
               mb: 3,
               borderRadius: 2
             }}>
-              Cannot view profile - Not logged in!
-            </Alert>
-            <Alert severity="warning" sx={{
-              mb: 3,
-              borderRadius: 2
-            }}>
-              TODO: WE DONT NEED THIS ERROR, THE PAGE/TAB/ETC CAN BE HIDDEN FOR LOGGED OUT USERS, GET ON IT FRONTEND LADS
+              Please log in to view profile
             </Alert>
             <Link href="/login">
               <Button fullWidth variant="contained">Log in</Button>
