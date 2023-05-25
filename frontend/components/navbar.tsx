@@ -1,5 +1,5 @@
 import FlightTakeoffOutlinedIcon from "@mui/icons-material/FlightTakeoffOutlined";
-import FaceIcon from '@mui/icons-material/Face';
+import FaceIcon from "@mui/icons-material/Face";
 import { Avatar, Tab, Tabs } from "@mui/material";
 import Link from "next/link";
 
@@ -20,7 +20,7 @@ export default function Navbar() {
 
                 <Link href="/profile">
                     <Avatar className='logo' sx={{ m: 1, bgcolor: "grey" }}>
-                        <FaceIcon />    
+                        <FaceIcon />
                     </Avatar>
                 </Link>
             </Tabs>
