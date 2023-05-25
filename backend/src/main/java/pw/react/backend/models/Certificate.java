@@ -12,6 +12,9 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
+
 @Entity
 @Table(name = "certificates")
 public class Certificate implements Serializable {
@@ -29,8 +32,19 @@ public class Certificate implements Serializable {
     private String certificateName;
     private LocalDateTime expiryDate;
     private String fileName;
-    private String fileSize;
+    private Long fileSize;
     private String fileType;
+
+    public Certificate(User owner, LocalDateTime expiryDate, MultipartFile certificateFile, String certificateName, byte[] bytes) {
+        this.owner = owner;
+        this.certificateFile = bytes;
+        this.certificateName = certificateName;
+        this.expiryDate = expiryDate;
+
+        this.fileName = StringUtils.cleanPath(certificateFile.getOriginalFilename());
+        this.fileType = certificateFile.getContentType();
+        this.fileSize = certificateFile.getSize();
+    }
 
     public Long getCertificateId() {
         return certificateId;
@@ -68,10 +82,10 @@ public class Certificate implements Serializable {
     public void setFileName(final String fileName) {
         this.fileName = fileName;
     }
-    public String getFileSize() {
+    public Long getFileSize() {
         return fileSize;
     }
-    public void setFileSize(final String fileSize) {
+    public void setFileSize(final Long fileSize) {
         this.fileSize = fileSize;
     }
     public String getFileType() {

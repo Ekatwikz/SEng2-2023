@@ -18,7 +18,7 @@ public record CertificateInfo(Long certificateId,
 
     Long ownerId,
     String fileName,
-    String fileSize,
+    Long fileSize,
     String fileType) {
     public static CertificateInfo valueFrom(Certificate certificate) {
         return new CertificateInfo (certificate.getCertificateId(),
