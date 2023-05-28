@@ -1,6 +1,6 @@
-import SearchIcon from '@mui/icons-material/Search';
-import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import SearchIcon from "@mui/icons-material/Search";
+import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { Typography, Box, Grid, Button, FormControl, InputLabel, Select, MenuItem, Divider, RadioGroup, FormControlLabel, Radio, TextField } from "@mui/material";
 
 export default function Home() {
@@ -10,13 +10,13 @@ export default function Home() {
         Here lies your next adventure ~
       </Typography>
 
-      <Box sx={{ 
+      <Box sx={{
         display: "flex",
         flexDirection: "column",
         alignTypographys: "center",
         justifyContent: "space-around",
         margin: "100px 0 0 0 "}}>
-        
+
       <LocalizationProvider dateAdapter={AdapterDayjs}>
           <Grid container>
             <Grid xs={2} sx={{bgcolor: "white", borderRadius: "5px", padding: "5px", margin: "5px"}}>
@@ -43,10 +43,10 @@ export default function Home() {
                 >
                   <MenuItem sx={{bgcolor: "white", borderRadius: "5px", padding: "5px", margin: "5px"}}>
                       <TextField inputMode="numeric" margin="none" label="Adults" defaultValue={1} variant="standard" fullWidth/>
-                  </MenuItem> 
+                  </MenuItem>
                   <MenuItem sx={{bgcolor: "white", borderRadius: "5px", padding: "5px", margin: "5px"}}>
                       <TextField inputMode="numeric" margin="none" label="Children" defaultValue={0} variant="standard" fullWidth/>
-                  </MenuItem> 
+                  </MenuItem>
                   <Divider/>
                   <MenuItem sx={{bgcolor: "white", borderRadius: "5px", padding: "5px", margin: "5px"}}>
                     <FormControl>
@@ -55,7 +55,7 @@ export default function Home() {
                         <FormControlLabel value="comfort" control={<Radio />} label="Comfort" />
                         <FormControlLabel value="bussiness" control={<Radio />} label="Bussines" />
                       </RadioGroup>
-                    </FormControl>  
+                    </FormControl>
                   </MenuItem>
                 </Select>
               </FormControl>

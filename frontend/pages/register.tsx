@@ -16,7 +16,7 @@ export class RegisterData {
 
     constructor(firstName: string, lastName: string, email: string, username: string, password: string, passwordRep: string) {
         this.firstName = firstName;
-        this.lastName = lastName;  
+        this.lastName = lastName;
         this.email = email;
         this.username = username;
         this.password = password;
@@ -86,7 +86,7 @@ export default function Register() {
               id="firstName"
               label="First Name"
               name="firstName"
-              style={{width: '45%', marginRight: '5%'}}
+              style={{width: "45%", marginRight: "5%"}}
             />
             <TextField
               margin="normal"
@@ -94,7 +94,7 @@ export default function Register() {
               id="lastName"
               label="Last Name"
               name="lastName"
-              style={{width: '45%', marginLeft: '5%'}}
+              style={{width: "45%", marginLeft: "5%"}}
             />
             <TextField
               margin="normal"
