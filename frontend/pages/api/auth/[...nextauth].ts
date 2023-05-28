@@ -24,7 +24,7 @@ export default NextAuth({
           password: credentials?.password,
         };
 
-        const res = await fetch(`http://${process.env.BACKEND_NETWORK_NAME}:${process.env.BACKEND_NETWORK_PORT}/logic/api/auth/login`, {
+        const res = await fetch(`http://${process.env.NEXT_PUBLIC_BACKEND_NETWORK_NAME}:${process.env.NEXT_PUBLIC_BACKEND_NETWORK_PORT}/logic/api/auth/login`, {
           method: "POST",
           body: JSON.stringify(payload),
           headers: {
