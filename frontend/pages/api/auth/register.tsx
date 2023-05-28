@@ -1,7 +1,7 @@
 import { RegisterData } from "../../register";
 
-const ENDPOINT = "http://localhost:8069/logic/api/users";
 const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+const ENDPOINT = "http://localhost:8069/logic/api/users";
 
 export const auth = async(data: RegisterData): Promise<boolean> => {
     if (!data.email || !data.username || !data.password || !data.passwordRep || data.password !== data.passwordRep) {
@@ -12,10 +12,12 @@ export const auth = async(data: RegisterData): Promise<boolean> => {
         return false;
     }
 
-    await fetch(ENDPOINT, {
+    return await fetch(ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+            "firstName": data.firstName,
+            "lastName": data.lastName,
             "username": data.username,
             "password": data.password,
             "email": data.email
@@ -33,7 +35,5 @@ export const auth = async(data: RegisterData): Promise<boolean> => {
         console.error(JSON.stringify(error));
         return false;
     });
-
-    return true;
 };
 

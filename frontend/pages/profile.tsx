@@ -2,7 +2,7 @@ import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-import { Alert, Box, Button, Card, Container, Typography } from "@mui/material";
+import { Alert, Box, Button, Card, Container, Typography, Grid } from "@mui/material";
 
 export default function About() {
   const { data: session } = useSession();

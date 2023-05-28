@@ -7,12 +7,16 @@ import { auth } from "./api/auth/register";
 import { signIn } from "next-auth/react";
 
 export class RegisterData {
+    firstName: string;
+    lastName: string;
     email: string;
     username: string;
     password: string;
     passwordRep: string;
 
-    constructor(email: string, username: string, password: string, passwordRep: string) {
+    constructor(firstName: string, lastName: string, email: string, username: string, password: string, passwordRep: string) {
+        this.firstName = firstName;
+        this.lastName = lastName;  
         this.email = email;
         this.username = username;
         this.password = password;
@@ -29,6 +33,8 @@ export default function Register() {
     const data = new FormData(event.currentTarget);
 
     const result = new RegisterData(
+      data.get("firstName")!.toString(),
+      data.get("lastName")!.toString(),
       data.get("email")!.toString(),
       data.get("username")!.toString(),
       data.get("password")!.toString(),
@@ -74,6 +80,22 @@ export default function Register() {
             </Typography>
           </Box>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <TextField
+              margin="normal"
+              required
+              id="firstName"
+              label="First Name"
+              name="firstName"
+              style={{width: '45%', marginRight: '5%'}}
+            />
+            <TextField
+              margin="normal"
+              required
+              id="lastName"
+              label="Last Name"
+              name="lastName"
+              style={{width: '45%', marginLeft: '5%'}}
+            />
             <TextField
               margin="normal"
               required
