@@ -35,8 +35,8 @@ services:
   next-frontend:
     image: pw-2023-seng-frontend-dev-ekatwikz:latest
     environment:
-      BACKEND_NETWORK_NAME: spring-boot-backend
-      BACKEND_NETWORK_PORT: 8080
+      NEXT_PUBLIC_BACKEND_NETWORK_NAME: spring-boot-backend
+      NEXT_PUBLIC_BACKEND_NETWORK_PORT: 8080
     build:
       context: ../../frontend
       dockerfile: Dev.Dockerfile
