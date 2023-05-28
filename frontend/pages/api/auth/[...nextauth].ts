@@ -1,7 +1,10 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { AircraftUser } from "@/pages/types";
 
-// TODO: USE PROPER TYPESCRIPT IN THIS FILE!!
+import { type User } from "next-auth";
+
+let returnedUser: AircraftUser; // I cry
 
 /* eslint new-cap: 0 */ // JUST for this file, since the functions are external!
 export default NextAuth({
@@ -18,7 +21,7 @@ export default NextAuth({
           type: "password"
         }
       },
-      async authorize(credentials, req) {
+      async authorize(credentials) {
         const payload = {
           username: credentials?.username,
           password: credentials?.password,
@@ -39,7 +42,16 @@ export default NextAuth({
 
         // If no error and we have user data, return it
         if (res.ok && user) {
-          return user;
+          returnedUser = {
+            id: user.id,
+            username: user.username,
+            email: user.email,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            jwttoken: user.jwttoken
+          };
+
+          return Promise.resolve(returnedUser as unknown as User); // bad
         }
 
         // Return null if user data could not be retrieved
@@ -66,11 +78,15 @@ export default NextAuth({
       return token;
     },
 
-    async session({ session, token }) {
+    async session({ session }) {
       if (session.user) {
-        //session.user.accessToken = token.accessToken; // ??
-        //session.user.refreshToken = token.refreshToken; // ??
-        //session.user.accessTokenExpires = token.accessTokenExpires; // ??
+        console.log(`Session: ${session}`);
+
+        const aircraftUser = session.user as AircraftUser;
+        aircraftUser.firstName = returnedUser.firstName;
+        aircraftUser.lastName = returnedUser.lastName;
+        aircraftUser.jwttoken = returnedUser.jwttoken;
+        session.user = aircraftUser;
       }
 
       return session;

@@ -35,13 +35,13 @@ export default function SignIn() {
       });
     } else {
       // Handle successful authentication
-      console.log(result);
       router.push("/profile");
     }
   };
 
   return (
     <Container component="main" maxWidth="xs">
+
       <Card elevation={6} sx={{
         padding: 5,
         borderRadius: 4
