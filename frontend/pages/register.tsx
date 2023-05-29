@@ -59,6 +59,7 @@ export default function Register() {
   return (
     <Container component="main" maxWidth="xs">
       <Card elevation={6} sx={{
+        minWidth: "130%",
         padding: 5,
         borderRadius: 4
       }}>
@@ -80,22 +81,28 @@ export default function Register() {
             </Typography>
           </Box>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+            <Grid container columnSpacing={2} rowSpacing={2} >
+              <Grid item xs={6}>
           <TextField
               margin="normal"
               required
+              fullWidth
               id="firstName"
               label="First Name"
               name="firstName"
-              style={{width: "45%", marginRight: "5%"}}
             />
+            </Grid>
+              <Grid item xs={6}>
             <TextField
               margin="normal"
               required
+              fullWidth
               id="lastName"
               label="Last Name"
               name="lastName"
-              style={{width: "45%", marginLeft: "5%"}}
             />
+            </Grid>
+              <Grid item xs={6}>
             <TextField
               margin="normal"
               required
@@ -105,6 +112,8 @@ export default function Register() {
               name="email"
               type="email"
             />
+            </Grid>
+              <Grid item xs={6}>
             <TextField
               margin="normal"
               required
@@ -113,6 +122,8 @@ export default function Register() {
               label="Username"
               name="username"
             />
+              </Grid>
+              <Grid item xs={6}>
             <TextField
               margin="normal"
               required
@@ -122,6 +133,8 @@ export default function Register() {
               type="password"
               id="password"
             />
+            </Grid>
+              <Grid item xs={6}>
             <TextField
               margin="normal"
               required
@@ -131,6 +144,8 @@ export default function Register() {
               type="password"
               id="passwordRep"
             />
+            </Grid>
+            </Grid>
             <Button
               type="submit"
               fullWidth
