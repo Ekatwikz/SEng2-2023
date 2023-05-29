@@ -37,11 +37,6 @@ export default function SignIn() {
       // Handle successful authentication
       console.log(result);
       router.push("/profile");
-
-      enqueueSnackbar("Login Successful [Example Snack, Y'all can remove]", {
-        key: "loginSucess",
-        variant: "success"
-      });
     }
   };
 
@@ -61,7 +56,7 @@ export default function SignIn() {
           <Box sx={{
             m: 5
           }}>
-            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+            <Avatar sx={{ m: 1, ml: 2, bgcolor: "secondary.main" }}>
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
@@ -99,8 +94,8 @@ export default function SignIn() {
 
             <Grid container>
               <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Register! [TODO]"}
+                <Link href="/register" variant="body2">
+                  {"Don't have an account? Register!"}
                 </Link>
               </Grid>
             </Grid>

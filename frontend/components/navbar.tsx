@@ -1,31 +1,29 @@
 import FlightTakeoffOutlinedIcon from "@mui/icons-material/FlightTakeoffOutlined";
+import FaceIcon from "@mui/icons-material/Face";
 import { Avatar, Tab, Tabs } from "@mui/material";
 import Link from "next/link";
 
-const Navbar = () => (
-    <nav>
-        <Avatar className='logo' sx={{ m: 1, bgcolor: "primary.main" }}>
-            <FlightTakeoffOutlinedIcon />
-        </Avatar>
+export default function Navbar() {
+    return (
+        <nav>
+            <Avatar className='logo' sx={{ m: 1, bgcolor: "primary.main" }}>
+                <FlightTakeoffOutlinedIcon />
+            </Avatar>
 
-        <Tabs
-            textColor="secondary"
-            indicatorColor="secondary"
-        >
-            <Link href="/">
-                <Tab label="Home" />
-            </Link>
-            <Link href="/profile">
-                <Tab label="Profile" />
-            </Link>
-            <Link href="/login">
-                <Tab label="Login" />
-            </Link>
-            <Link href=""> { /* TODO, also remove disable */ }
-                <Tab label="Register" disabled />
-            </Link>
-        </Tabs>
-    </nav>
-);
+            <Tabs
+                textColor="secondary"
+                indicatorColor="secondary"
+            >
+                <Link href="/">
+                    <Tab label="Home" />
+                </Link>
 
-export default Navbar;
+                <Link href="/profile">
+                    <Avatar className='logo' sx={{ m: 1, bgcolor: "grey" }}>
+                        <FaceIcon />
+                    </Avatar>
+                </Link>
+            </Tabs>
+        </nav>
+    );
+};
