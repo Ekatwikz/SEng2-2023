@@ -18,7 +18,7 @@ public abstract class BaseController {
         log.info("Controller request headers {}",
                 headers.entrySet()
                         .stream()
-                        .map(entry -> String.format("%s->[%s]", entry.getKey(), String.join(",", entry.getValue())))
-                        .collect(joining(",")));
+                        .map(entry -> String.format("%s->[%s]", entry.getKey(), String.join(", ", entry.getValue())))
+                        .collect(joining(", ")));
     }
 }

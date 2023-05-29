@@ -2,7 +2,6 @@ package pw.react.backend.services;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -16,7 +15,6 @@ public interface ICertificateService {
         final String certificateName
     );
 
-    Optional<List<CertificateInfo>> getByUser(Long id);
-    List<CertificateInfo> getAll();
+    List<CertificateInfo> getByUser(Long id);
 }
 

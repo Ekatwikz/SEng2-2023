@@ -55,14 +55,9 @@ public class CertificateService implements ICertificateService {
     }
 
     @Override
-    public Optional<List<CertificateInfo>> getByUser(Long id) {
+    public List<CertificateInfo> getByUser(Long id) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getByUser'");
     }
-
-    @Override
-    public List<CertificateInfo> getAll() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAll'");
-    }
 }
+
