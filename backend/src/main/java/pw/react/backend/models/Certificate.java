@@ -35,6 +35,8 @@ public class Certificate implements Serializable {
     private Long fileSize;
     private String fileType;
 
+    public Certificate() { }
+
     public Certificate(User owner, LocalDate expiryDate, MultipartFile certificateFile, String certificateName, byte[] bytes) {
         this.owner = owner;
         this.certificateFile = bytes;
