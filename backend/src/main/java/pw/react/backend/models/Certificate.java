@@ -1,7 +1,7 @@
 package pw.react.backend.models;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,12 +30,12 @@ public class Certificate implements Serializable {
     private byte[] certificateFile;
 
     private String certificateName;
-    private LocalDateTime expiryDate;
+    private LocalDate expiryDate;
     private String fileName;
     private Long fileSize;
     private String fileType;
 
-    public Certificate(User owner, LocalDateTime expiryDate, MultipartFile certificateFile, String certificateName, byte[] bytes) {
+    public Certificate(User owner, LocalDate expiryDate, MultipartFile certificateFile, String certificateName, byte[] bytes) {
         this.owner = owner;
         this.certificateFile = bytes;
         this.certificateName = certificateName;
@@ -70,10 +70,10 @@ public class Certificate implements Serializable {
     public void setCertificateName(final String certificateName) {
         this.certificateName = certificateName;
     }
-    public LocalDateTime getExpiryDate() {
+    public LocalDate getExpiryDate() {
         return expiryDate;
     }
-    public void setExpiryDate(final LocalDateTime expiryDate) {
+    public void setExpiryDate(final LocalDate expiryDate) {
         this.expiryDate = expiryDate;
     }
     public String getFileName() {

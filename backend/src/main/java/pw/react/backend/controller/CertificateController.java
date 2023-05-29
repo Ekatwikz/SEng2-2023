@@ -1,6 +1,6 @@
 package pw.react.backend.controller;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,10 +37,9 @@ public class CertificateController extends BaseController {
         @RequestParam("id") Long ownerId,
         @RequestParam("file") MultipartFile file,
 
-
         @RequestParam("expiryDate")
-        @DateTimeFormat(pattern = "yyyy-MM-dd")
-        LocalDateTime expiryDate,
+        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+        LocalDate expiryDate,
 
         @RequestParam("certificateName") String certificateName) {
 

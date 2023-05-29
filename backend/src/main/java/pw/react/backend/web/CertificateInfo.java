@@ -1,21 +1,12 @@
 package pw.react.backend.web;
 
-import java.time.LocalDateTime;
-
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import java.time.LocalDate;
 
 import pw.react.backend.models.Certificate;
-import pw.react.backend.utils.JsonDateDeserializer;
-import pw.react.backend.utils.JsonDateSerializer;
 
 public record CertificateInfo(Long certificateId,
     String certificateName,
-
-    @JsonDeserialize(using = JsonDateDeserializer.class)
-    @JsonSerialize(using = JsonDateSerializer.class)
-    LocalDateTime expiryDate,
-
+    LocalDate expiryDate,
     Long ownerId,
     String fileName,
     Long fileSize,

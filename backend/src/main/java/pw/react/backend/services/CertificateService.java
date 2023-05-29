@@ -1,7 +1,7 @@
 package pw.react.backend.services;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,7 +26,7 @@ public class CertificateService implements ICertificateService {
     @Override
     public Certificate save(Long userId,
         MultipartFile file,
-        LocalDateTime expiryDate,
+        LocalDate expiryDate,
         String certificateName) {
         Optional<User> maybeUser = userRepository.findById(userId);
         if (maybeUser.isEmpty()) {
