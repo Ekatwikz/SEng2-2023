@@ -50,6 +50,11 @@ public class MainConfig {
     }
 
     @Bean
+    public ICertificateService certificateService() {
+        return new CertificateService();
+    }
+
+    @Bean
     public WebMvcConfigurer corsConfigurer() {
         getCorsUrls();
         return new WebMvcConfigurer() {

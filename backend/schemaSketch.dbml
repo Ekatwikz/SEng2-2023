@@ -9,7 +9,7 @@ aircrafts {
 aircraft_images {
 	aircraft_image_id bigint pk increments
 	data longblob
-	aircraft_id bigint > aircrafts.aircraft_id
+	aircraft_id bigint *> aircrafts.aircraft_id
 
 	file_name varchar
 	file_size bigint
@@ -20,7 +20,8 @@ bookings {
 	booking_id bigint pk increments
 	booking_start_date_time datetime
 	booking_end_date_time datetime
-	aircraft_id bigint > aircrafts.aircraft_id
+	aircraft_id bigint *> aircrafts.aircraft_id
+	owner_id bigint *> users.id
 }
 
 users {
@@ -37,7 +38,7 @@ certificates {
 	certificate_name varchar
 	expiry_date datetime
 	certificate_file longblob
-	owner_id bigint > users.id
+	owner_id bigint *> users.id
 
 	file_name varchar
 	file_size bigint
