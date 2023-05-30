@@ -38,12 +38,12 @@ public class AircraftImage {
         // to send lol
     }
 
-    public AircraftImage(final Aircraft aircraft, final MultipartFile file, final byte[] bytes) {
+    public AircraftImage(final Aircraft aircraft, final MultipartFile file, final byte[] data) {
         this.fileName = StringUtils.cleanPath(file.getOriginalFilename());
         this.fileType = file.getContentType();
         this.fileSize = file.getSize();
         this.aircraft = aircraft;
-        this.data = bytes;
+        this.data = data;
     }
 
     @Override

@@ -65,6 +65,11 @@ public class MainConfig {
     }
 
     @Bean
+    public IAircraftImageService aircraftImageService() {
+        return new AircraftImageService();
+    }
+
+    @Bean
     public WebMvcConfigurer corsConfigurer() {
         getCorsUrls();
         return new WebMvcConfigurer() {
