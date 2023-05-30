@@ -1,7 +1,7 @@
 import { RegisterData } from "../../register";
 
 const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-const ENDPOINT = "http://localhost:8069/logic/api/users";
+const ENDPOINT = "http://localhost:8069/registration";
 
 export const auth = async(data: RegisterData): Promise<boolean> => {
     if (!data.email || !data.username || !data.password || !data.passwordRep || data.password !== data.passwordRep) {

@@ -55,6 +55,21 @@ public class MainConfig {
     }
 
     @Bean
+    public IBookingService bookingService() {
+        return new BookingService();
+    }
+
+    @Bean
+    public IAircraftService aircraftService() {
+        return new AircraftService();
+    }
+
+    @Bean
+    public IAircraftImageService aircraftImageService() {
+        return new AircraftImageService();
+    }
+
+    @Bean
     public WebMvcConfigurer corsConfigurer() {
         getCorsUrls();
         return new WebMvcConfigurer() {

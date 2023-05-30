@@ -7,10 +7,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.RequestHeader;
 
-public abstract class BaseController {
+public abstract class BaseLoggable {
     protected static Logger log;
 
-    public BaseController() {
+    public BaseLoggable() {
        log = LoggerFactory.getLogger(getClass());
     }
 

@@ -11,15 +11,13 @@ import pw.react.backend.models.User;
 import pw.react.backend.services.IUserService;
 import pw.react.backend.web.UserDto;
 
-import java.util.Optional;
-
 import javax.annotation.PostConstruct;
 
 @RestController
 @RequestMapping(path = JwtUserController.USERS_PATH)
 @Profile({"jwt"})
 public class JwtUserController {
-    public static final String USERS_PATH = "/logic/api/users";
+    public static final String USERS_PATH = "/registration";
     private static final Logger log = LoggerFactory.getLogger(JwtUserController.class);
 
     private final IUserService userService;
@@ -45,16 +43,16 @@ public class JwtUserController {
     }
 
     // not the most secure...
-    @GetMapping(path = "/{userId}")
-    public ResponseEntity<UserDto> getUser(@RequestBody UserDto userDto,
-        @PathVariable Long userId) {
-        Optional<User> maybeUser = userService.findById(userId);
-
-        if (maybeUser.isEmpty()) {
-            ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-        }
-
-        log.info("User info fetched.");
-        return ResponseEntity.status(HttpStatus.CREATED).body(UserDto.valueFrom(maybeUser.get()));
-    }
+    // @GetMapping(path = "/{userId}")
+    // public ResponseEntity<UserDto> getUser(@RequestBody UserDto userDto,
+    //     @PathVariable Long userId) {
+    //     Optional<User> maybeUser = userService.findById(userId);
+    //
+    //     if (maybeUser.isEmpty()) {
+    //         ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+    //     }
+    //
+    //     log.info("User info fetched.");
+    //     return ResponseEntity.status(HttpStatus.CREATED).body(UserDto.valueFrom(maybeUser.get()));
+    // }
 }

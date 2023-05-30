@@ -16,17 +16,25 @@ public class MySimpleUtils {
         }
     }
 
-    public static <T extends Number> boolean intevalIsValid(T startA, T endA) {
+    public static <T extends Number> boolean intervalIsValid(T startA, T endA) {
         return startA.doubleValue() <= endA.doubleValue();
     }
 
     // both assume valid intervals?
-    public static <T extends Number> boolean intervalsOverlap(T startA, T endA, T startB, T endB) {
+    public static <T extends Number, U extends Number, V extends Number, W extends Number>
+    boolean intervalsOverlap(T startA, U endA, V startB, W endB) {
         return startA.doubleValue() <= endB.doubleValue()
-                && endA.doubleValue() >= startB.doubleValue();
+        && endA.doubleValue() >= startB.doubleValue();
     }
-    public static <T extends Number> boolean inveralIsASubset(T startA, T endA, T startB, T endB) {
+
+    public static <T extends Number, V extends Number, W extends Number>
+    boolean valueIsInInterval(T startA, V startB, W endB) {
+        return intervalsOverlap(startA, startA, startB, endB);
+    }
+
+    public static <T extends Number, U extends Number, V extends Number, W extends Number>
+    boolean intervalIsASubset(T startA, U endA, V startB, W endB) {
         return startB.doubleValue() <= startA.doubleValue()
-                && endA.doubleValue() <= endB.doubleValue();
+        && endA.doubleValue() <= endB.doubleValue();
     }
 }

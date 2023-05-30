@@ -22,8 +22,6 @@ import javax.validation.Valid;
 @RequestMapping
 @Profile({"jwt"})
 public class JwtAuthenticationController {
-    public static final String AUTHENTICATION_PATH = "/auth"; // ?
-
     private final AuthenticationManager authenticationManager;
     private final JwtTokenService jwtTokenService;
     private final JwtUserDetailsService userDetailsService;
@@ -34,7 +32,7 @@ public class JwtAuthenticationController {
         this.userDetailsService = userDetailsService;
     }
 
-    @PostMapping(path = {"/logic/api/auth/login", "/authenticate"})
+    @PostMapping("/login")
     public ResponseEntity<LoginResponse> createAuthenticationToken(@Valid @RequestBody JwtRequest authenticationRequest,
                                                        HttpServletRequest request) throws Exception {
         authenticate(authenticationRequest.username(), authenticationRequest.password());
@@ -54,15 +52,15 @@ public class JwtAuthenticationController {
         }
     }
 
-    @PostMapping(path = "/logic/api/auth/logout")
+    @PostMapping("/logout")
     public ResponseEntity<Void> invalidateToken(HttpServletRequest request) {
         boolean result = jwtTokenService.invalidateToken(request);
         return result ? ResponseEntity.ok().build() : ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
-    @DeleteMapping("/logic/api/auth")
-    public ResponseEntity<Void> removeInvalidTokens() {
-        jwtTokenService.removeTokens();
-        return ResponseEntity.accepted().build();
-    }
+    // @DeleteMapping("/logic/api/auth")
+    // public ResponseEntity<Void> removeInvalidTokens() {
+    //     jwtTokenService.removeTokens();
+    //     return ResponseEntity.accepted().build();
+    // }
 }

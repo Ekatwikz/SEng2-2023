@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import pw.react.backend.dao.CertificateRepository;
 import pw.react.backend.dao.UserRepository;
 import pw.react.backend.exceptions.InvalidFileException;
+import pw.react.backend.exceptions.ResourceNotFoundException;
 import pw.react.backend.models.Certificate;
 import pw.react.backend.models.User;
 import pw.react.backend.web.CertificateInfo;
@@ -30,11 +31,11 @@ public class CertificateService implements ICertificateService {
         String certificateName) {
         Optional<User> maybeUser = userRepository.findById(userId);
         if (maybeUser.isEmpty()) {
-            throw new RuntimeException("Couldn't find User ");
+            throw new ResourceNotFoundException("Couldn't find User ");
         }
 
         if (file.isEmpty()) {
-            throw new RuntimeException("File is Empty?!");
+            throw new InvalidFileException("File is Empty?!");
         }
 
         // Normalize file name

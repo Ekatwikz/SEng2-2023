@@ -19,7 +19,7 @@ import pw.react.backend.web.UserDto;
 @RequestMapping(path = UserController.USERS_PATH)
 @Profile({"!jwt"})
 public class UserController {
-    public static final String USERS_PATH = "/logic/api/users";
+    public static final String USERS_PATH = "/registration";
     private static final Logger log = LoggerFactory.getLogger(UserController.class);
 
     private final IUserService userService;
@@ -28,7 +28,6 @@ public class UserController {
         this.userService = userService;
     }
 
-    @Operation(summary = "Create new user")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "201",

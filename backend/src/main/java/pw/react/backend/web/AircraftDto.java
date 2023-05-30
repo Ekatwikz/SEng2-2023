@@ -27,6 +27,7 @@ public record AircraftDto(Long aircraftId,
         aircraft.setAircraftType(aircraftDto.aircraftType());
         aircraft.setAircraftRegistration(aircraftDto.aircraftRegistration());
         aircraft.setAircraftDescription(aircraftDto.aircraftDescription());
+
         return aircraft;
     }
 }

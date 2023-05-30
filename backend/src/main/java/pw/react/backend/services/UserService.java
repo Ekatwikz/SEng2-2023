@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import pw.react.backend.dao.UserRepository;
-import pw.react.backend.exceptions.UserValidationException;
+import pw.react.backend.exceptions.ValidationException;
 import pw.react.backend.models.User;
 
 import java.util.Optional;
@@ -43,30 +43,30 @@ public class UserService implements IUserService {
         if (user != null) {
             if (!isValid(user.getUsername())) {
                 log.error("Empty username.");
-                throw new UserValidationException("Empty username.");
+                throw new ValidationException("Empty username.");
             }
             if (!isValid(user.getPassword())) {
                 log.error("Empty user password.");
-                throw new UserValidationException("Empty user password.");
+                throw new ValidationException("Empty user password.");
             }
             if (!isValid(user.getEmail())) {
                 log.error("UEmpty email.");
-                throw new UserValidationException("Empty email.");
+                throw new ValidationException("Empty email.");
             }
 
             if (!isValid(user.getFirstName())) {
                 log.error("UEmpty firstName.");
-                throw new UserValidationException("Empty firstName.");
+                throw new ValidationException("Empty firstName.");
             }
             if (!isValid(user.getLastName())) {
                 log.error("UEmpty lastName.");
-                throw new UserValidationException("Empty lastName.");
+                throw new ValidationException("Empty lastName.");
             }
 
             return true;
         }
         log.error("User is null.");
-        throw new UserValidationException("User is null.");
+        throw new ValidationException("User is null.");
     }
 
     private boolean isValid(String value) {
