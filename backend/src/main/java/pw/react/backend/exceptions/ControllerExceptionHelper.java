@@ -16,7 +16,7 @@ public class ControllerExceptionHelper {
 
     @ExceptionHandler(value = { InvalidFileException.class })
     public ResponseEntity<ExceptionDetails> handleNotFound(InvalidFileException ex) {
-        log.error("Invalid Input Exception: {}", ex.getMessage());
+        log.error("Invalid File Exception: {}", ex.getMessage());
         return new ResponseEntity<>(new ExceptionDetails(HttpStatus.NOT_FOUND, ex.getMessage()), HttpStatus.NOT_FOUND);
     }
 
@@ -42,9 +42,9 @@ public class ControllerExceptionHelper {
         return new ResponseEntity<>(exceptionDetails, HttpStatus.UNAUTHORIZED);
     }
 
-    @ExceptionHandler(value = { UserValidationException.class })
-    public ResponseEntity<ExceptionDetails> UserValidationException(UserValidationException ex) {
-        log.error("User Validation Exception: {}", ex.getMessage());
+    @ExceptionHandler(value = { ValidationException.class })
+    public ResponseEntity<ExceptionDetails> UserValidationException(ValidationException ex) {
+        log.error("Validation Exception: {}", ex.getMessage());
         return new ResponseEntity<>(new ExceptionDetails(HttpStatus.BAD_REQUEST, ex.getMessage()), HttpStatus.BAD_REQUEST);
     }
 

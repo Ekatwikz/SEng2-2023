@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import pw.react.backend.dao.CertificateRepository;
 import pw.react.backend.dao.UserRepository;
+import pw.react.backend.exceptions.ResourceNotFoundException;
 import pw.react.backend.models.Certificate;
 import pw.react.backend.models.User;
 import pw.react.backend.services.ICertificateService;
@@ -31,7 +32,7 @@ import pw.react.backend.web.CertificateInfo;
 
 @RestController
 @RequestMapping(path = CertificateController.CERTIFICATE_PATH)
-public class CertificateController extends BaseController {
+public class CertificateController extends BaseLoggable {
     public static final String CERTIFICATE_PATH = "/logic/api/user/certificates";
 
     @Autowired
@@ -74,7 +75,7 @@ public class CertificateController extends BaseController {
 
         Optional<Certificate> maybeCert = certificateRepository.findById(certificateId);
         if (maybeCert.isEmpty()) {
-            throw new RuntimeException("Huh??");
+            throw new ResourceNotFoundException("Couldn't find that certificate");
         }
 
         return ResponseEntity.status(HttpStatus.OK).body(CertificateInfo.valueFrom(maybeCert.get()));
@@ -88,7 +89,7 @@ public class CertificateController extends BaseController {
 
         Optional<Certificate> maybeCert = certificateRepository.findById(certificateId);
         if (maybeCert.isEmpty()) {
-            throw new RuntimeException("Huh??");
+            throw new RuntimeException("Couldn't find that certificate");
         }
 
         return ResponseEntity.ok()
