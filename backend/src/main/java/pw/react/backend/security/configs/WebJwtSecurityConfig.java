@@ -59,12 +59,14 @@ public class WebJwtSecurityConfig extends WebSecurityConfigurerAdapter {
                 .cors().disable()
                 .csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and()
+
                 // make sure we use stateless session; session won't be used to store user's state.
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                // dont authenticate this particular request
-                .authorizeRequests().antMatchers("/logic/api/auth/login").permitAll()
+
+                // dont authenticate these particular requests
+                .authorizeRequests().antMatchers("/login").permitAll()
                 .antMatchers("/authenticate").permitAll()
-                .antMatchers(HttpMethod.POST, "/logic/api/users").permitAll()
+                .antMatchers(HttpMethod.POST, "/registration").permitAll()
                 .antMatchers(HttpMethod.GET, "/actuator/**").permitAll()
                 .antMatchers( "/v3/api-docs/**", "/swagger-ui/**").permitAll()
 

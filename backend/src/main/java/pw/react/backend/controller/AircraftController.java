@@ -21,7 +21,7 @@ import pw.react.backend.web.AircraftDto;
 @RestController
 @RequestMapping(path = AircraftController.AIRCRAFT_PATH)
 public class AircraftController extends BaseLoggable {
-    public static final String AIRCRAFT_PATH = "/logic/api/aircrafts";
+    public static final String AIRCRAFT_PATH = "/aircrafts";
 
     @Autowired
     AircraftRepository aircraftRepository;

@@ -53,7 +53,7 @@ public class AircraftImageController extends BaseLoggable {
         return ResponseEntity.status(HttpStatus.CREATED).body(AircraftImageInfo.valueFrom(aircraftImage));
     }
 
-    @Operation(summary = "Get the Nth (0-indexed) image for an existing aircraft")
+    //@Operation(summary = "Get the Nth (0-indexed) image for an existing aircraft")
     @GetMapping("/{aircraftId}/images/{imageNumber}")
     public ResponseEntity<Resource> getOfferImageByImageNumber(@RequestHeader HttpHeaders headers,
         @PathVariable Long aircraftId,

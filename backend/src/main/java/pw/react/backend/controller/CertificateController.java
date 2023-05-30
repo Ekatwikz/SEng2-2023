@@ -33,7 +33,7 @@ import pw.react.backend.web.CertificateInfo;
 @RestController
 @RequestMapping(path = CertificateController.CERTIFICATE_PATH)
 public class CertificateController extends BaseLoggable {
-    public static final String CERTIFICATE_PATH = "/logic/api/user/certificates";
+    public static final String CERTIFICATE_PATH = "/user/certificates";
 
     @Autowired
     ICertificateService certificateService;

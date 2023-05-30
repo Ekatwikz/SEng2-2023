@@ -38,7 +38,6 @@ public class ControllerExceptionHelper {
     public ResponseEntity<ExceptionDetails> handleAuthenticationException(AuthenticationException ex) {
         log.error("Authentication Exception: {}", ex.getMessage());
         ExceptionDetails exceptionDetails = new ExceptionDetails(HttpStatus.UNAUTHORIZED, ex.getMessage());
-        exceptionDetails.setPath(JwtAuthenticationController.AUTHENTICATION_PATH);
         return new ResponseEntity<>(exceptionDetails, HttpStatus.UNAUTHORIZED);
     }
 

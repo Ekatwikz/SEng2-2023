@@ -30,7 +30,7 @@ import pw.react.backend.web.BookingDto;
 @RestController
 @RequestMapping(path = BookingController.BOOKINGS_PATH)
 public class BookingController extends BaseLoggable {
-    public static final String BOOKINGS_PATH = "/logic/api/bookings";
+    public static final String BOOKINGS_PATH = "/bookings";
 
     @Autowired
     BookingRepository bookingRepository;

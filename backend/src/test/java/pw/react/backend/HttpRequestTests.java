@@ -30,13 +30,13 @@ class HttpRequestTests {
     private String baseUrl;
     @BeforeEach
     public void setUp() {
-	baseUrl = "http://localhost:" + port + "/logic/api/";
+	baseUrl = "http://localhost:" + port + "";
     }
 
     @Test
     public void usersEndpointIsUpAndRequiresAuth() {
 	// basic af smoke test, if this fails nothing should work tbh
-	final ResponseEntity<?> response = restTemplate.getForEntity(String.format("%s/users", baseUrl), Object.class);
+	final ResponseEntity<?> response = restTemplate.getForEntity(String.format("%s/registration", baseUrl), Object.class);
 	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.UNAUTHORIZED);
     }
 
@@ -50,7 +50,7 @@ class HttpRequestTests {
 	newUser.setEmail("testing@example.com");
 
 	final ResponseEntity<UserDto> response = restTemplate.exchange(
-	    String.format("%s/users", baseUrl),
+	    String.format("%s/registration", baseUrl),
 	    HttpMethod.POST,
 	    new HttpEntity<>(newUser),
 	    UserDto.class);
