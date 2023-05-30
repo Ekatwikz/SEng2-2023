@@ -1,6 +1,5 @@
 package pw.react.backend.controller;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +11,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import pw.react.backend.dao.AircraftRepository;
 import pw.react.backend.models.Aircraft;
-import pw.react.backend.services.AircraftService;
+import pw.react.backend.services.IAircraftService;
 import pw.react.backend.web.AircraftDto;
 
 @RestController
@@ -28,43 +26,33 @@ public class AircraftController extends BaseLoggable {
     @Autowired
     AircraftRepository aircraftRepository;
 
+    @Autowired
+    IAircraftService aircraftService;
+
     @PostMapping
     public ResponseEntity<AircraftDto> createAircraft(
-        @RequestHeader HttpHeaders headers,
-        @RequestBody AircraftDto aircraftDto
+        @RequestHeader final HttpHeaders headers,
+        @RequestBody final AircraftDto aircraftDto
     ) {
         logHeaders(headers);
 
-        Aircraft aircraft = AircraftDto.convertToAircraft(aircraftDto);
-        AircraftService.validateAircraft(aircraft);
-        Aircraft savedAircraft = aircraftRepository.save(aircraft);
+        final Aircraft aircraft = AircraftDto.convertToAircraft(aircraftDto);
+        aircraftService.validateAircraft(aircraft);
+        final Aircraft savedAircraft = aircraftRepository.save(aircraft);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(AircraftDto.valueFrom(savedAircraft));
     }
 
     @GetMapping
-    public ResponseEntity<List<AircraftDto>> getAllAircrafts(
-        @RequestHeader HttpHeaders headers,
-        @RequestBody AircraftDto aircraftDto
-    ) {
+    public ResponseEntity<List<AircraftDto>> getAllAircrafts(@RequestHeader final HttpHeaders headers) {
         logHeaders(headers);
 
-        List<Aircraft> aircrafts = aircraftRepository.findAll();
-        List<AircraftDto> aircraftDtos = aircrafts.stream()
+        final List<Aircraft> aircrafts = aircraftRepository.findAll();
+        final List<AircraftDto> aircraftDtos = aircrafts.stream()
         .map(AircraftDto::valueFrom)
         .toList();
 
         return ResponseEntity.status(HttpStatus.OK).body(aircraftDtos);
-    }
-
-    @GetMapping
-    public ResponseEntity<List<AircraftDto>> getAllAircraftsByPeriod(
-        @RequestHeader HttpHeaders headers,
-        @RequestBody AircraftDto aircraftDto,
-        @RequestParam(required = false) LocalDate dateFrom,
-        @RequestParam(required = false) LocalDate dateTo
-    ) {
-        return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 }
 

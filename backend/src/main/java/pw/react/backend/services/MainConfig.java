@@ -55,6 +55,11 @@ public class MainConfig {
     }
 
     @Bean
+    public IAircraftService aircraftService() {
+        return new AircraftService();
+    }
+
+    @Bean
     public WebMvcConfigurer corsConfigurer() {
         getCorsUrls();
         return new WebMvcConfigurer() {

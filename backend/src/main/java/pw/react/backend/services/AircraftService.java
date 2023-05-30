@@ -1,11 +1,18 @@
 package pw.react.backend.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import pw.react.backend.controller.BaseLoggable;
+import pw.react.backend.dao.AircraftRepository;
 import pw.react.backend.exceptions.ValidationException;
 import pw.react.backend.models.Aircraft;
 
 public class AircraftService extends BaseLoggable implements IAircraftService {
-    public static void validateAircraft(Aircraft aircraft) {
+    @Autowired
+    AircraftRepository aircraftRepository;
+
+    @Override
+    public void validateAircraft(Aircraft aircraft) {
         if (aircraft == null) {
             log.error("Aircraft is null.");
             throw new ValidationException("NULL aircraft");
@@ -29,6 +36,11 @@ public class AircraftService extends BaseLoggable implements IAircraftService {
         if (!isValid(aircraft.getAircraftType())) {
             log.error("Empty aircraft type.");
             throw new ValidationException("Empty aircraft type.");
+        }
+
+        Long aircraftId = aircraft.getAircraftId();
+        if (aircraftId != null && aircraftRepository.findById(aircraftId).isEmpty()) {
+            throw new ValidationException("Couldn't find aircraft with given Id");
         }
     }
 
