@@ -33,7 +33,7 @@ public record BookingDto(Long bookingId,
     public static Booking convertToBooking(BookingDto bookingDto) {
         Booking booking = new Booking();
 
-        booking.setBookingId(bookingDto.aircraftId());
+        booking.setBookingId(bookingDto.bookingId());
         booking.setBookingStartDateTime(bookingDto.bookingStartDateTime());
         booking.setBookingEndDateTime(bookingDto.bookingEndDateTime());
 

@@ -55,6 +55,11 @@ public class MainConfig {
     }
 
     @Bean
+    public IBookingService bookingService() {
+        return new BookingService();
+    }
+
+    @Bean
     public IAircraftService aircraftService() {
         return new AircraftService();
     }
