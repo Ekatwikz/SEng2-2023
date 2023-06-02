@@ -5,6 +5,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
@@ -53,7 +55,10 @@ public class CertificateController extends BaseLoggable {
         @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
         LocalDateTime expiryDate,
 
-        @RequestParam("certificateName") String certificateName) {
+        @RequestParam("certificateName") String certificateName,
+
+        HttpServletRequest httpServletRequest
+    ) {
         logHeaders(headers);
 
         Optional<User> maybeUser = userRepository.findById(ownerId);
@@ -63,14 +68,16 @@ public class CertificateController extends BaseLoggable {
         }
 
         Certificate certificate = certificateService.save(ownerId, file, expiryDate, certificateName);
-        CertificateInfo certificateInfo = CertificateInfo.valueFrom(certificate);
+        CertificateInfo certificateInfo = CertificateInfo.valueFrom(certificate, httpServletRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(certificateInfo);
     }
 
     @GetMapping("/{certificateId}")
     public ResponseEntity<CertificateInfo> getCertById(
         @RequestHeader HttpHeaders headers,
-        @PathVariable Long certificateId) {
+        @PathVariable Long certificateId,
+        HttpServletRequest httpServletRequest
+    ) {
         logHeaders(headers);
 
         Optional<Certificate> maybeCert = certificateRepository.findById(certificateId);
@@ -78,7 +85,7 @@ public class CertificateController extends BaseLoggable {
             throw new ResourceNotFoundException("Couldn't find that certificate");
         }
 
-        return ResponseEntity.status(HttpStatus.OK).body(CertificateInfo.valueFrom(maybeCert.get()));
+        return ResponseEntity.status(HttpStatus.OK).body(CertificateInfo.valueFrom(maybeCert.get(), httpServletRequest));
     }
 
     @GetMapping("/{certificateId}/file")
@@ -99,13 +106,15 @@ public class CertificateController extends BaseLoggable {
         .body(new ByteArrayResource(maybeCert.get().getCertificateFile()));
     }
 
-    @GetMapping("/all")
-    public ResponseEntity<Collection<CertificateInfo>> getAllCerts(@RequestHeader HttpHeaders headers) {
+    @GetMapping
+    public ResponseEntity<Collection<CertificateInfo>> getAllCerts(@RequestHeader HttpHeaders headers,
+        HttpServletRequest httpServletRequest
+    ) {
         logHeaders(headers);
 
         List<Certificate> certs = certificateRepository.findAll();
         List<CertificateInfo> certInfos = certs.stream()
-        .map(CertificateInfo::valueFrom)
+        .map(cert -> CertificateInfo.valueFrom(cert, httpServletRequest))
         .toList();
 
         return ResponseEntity.status(HttpStatus.OK).body(certInfos);

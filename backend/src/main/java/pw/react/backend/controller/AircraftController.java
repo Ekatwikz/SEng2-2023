@@ -2,6 +2,8 @@ package pw.react.backend.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -32,7 +34,8 @@ public class AircraftController extends BaseLoggable {
     @PostMapping
     public ResponseEntity<AircraftDto> createAircraft(
         @RequestHeader final HttpHeaders headers,
-        @RequestBody final AircraftDto aircraftDto
+        @RequestBody final AircraftDto aircraftDto,
+        HttpServletRequest httpServletRequest
     ) {
         logHeaders(headers);
 
@@ -40,16 +43,18 @@ public class AircraftController extends BaseLoggable {
         aircraftService.validateAircraft(aircraft);
         final Aircraft savedAircraft = aircraftRepository.save(aircraft);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(AircraftDto.valueFrom(savedAircraft));
+        return ResponseEntity.status(HttpStatus.CREATED).body(AircraftDto.valueFrom(savedAircraft, httpServletRequest));
     }
 
     @GetMapping
-    public ResponseEntity<List<AircraftDto>> getAllAircrafts(@RequestHeader final HttpHeaders headers) {
+    public ResponseEntity<List<AircraftDto>> getAllAircrafts(@RequestHeader final HttpHeaders headers,
+        HttpServletRequest httpServletRequest
+    ) {
         logHeaders(headers);
 
         final List<Aircraft> aircrafts = aircraftRepository.findAll();
         final List<AircraftDto> aircraftDtos = aircrafts.stream()
-        .map(AircraftDto::valueFrom)
+        .map(aircraft -> AircraftDto.valueFrom(aircraft, httpServletRequest))
         .toList();
 
         return ResponseEntity.status(HttpStatus.OK).body(aircraftDtos);
