@@ -1,12 +1,12 @@
 package pw.react.backend.web;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import pw.react.backend.models.Certificate;
 
 public record CertificateInfo(Long certificateId,
     String certificateName,
-    LocalDate expiryDate,
+    LocalDateTime expiryDate,
     Long ownerId,
     String fileName,
     Long fileSize,

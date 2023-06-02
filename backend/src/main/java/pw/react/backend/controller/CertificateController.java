@@ -1,6 +1,6 @@
 package pw.react.backend.controller;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -50,8 +50,8 @@ public class CertificateController extends BaseLoggable {
         @RequestParam("file") MultipartFile file,
 
         @RequestParam("expiryDate")
-        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-        LocalDate expiryDate,
+        @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+        LocalDateTime expiryDate,
 
         @RequestParam("certificateName") String certificateName) {
         logHeaders(headers);
