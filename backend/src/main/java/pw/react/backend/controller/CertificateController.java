@@ -59,7 +59,7 @@ public class CertificateController extends BaseLoggable {
         Optional<User> maybeUser = userRepository.findById(ownerId);
 
         if (!maybeUser.isPresent()) {
-            throw new RuntimeException("User not found, can't add certificate");
+            throw new ResourceNotFoundException("User not found, can't add certificate");
         }
 
         Certificate certificate = certificateService.save(ownerId, file, expiryDate, certificateName);
@@ -89,7 +89,7 @@ public class CertificateController extends BaseLoggable {
 
         Optional<Certificate> maybeCert = certificateRepository.findById(certificateId);
         if (maybeCert.isEmpty()) {
-            throw new RuntimeException("Couldn't find that certificate");
+            throw new ResourceNotFoundException("Couldn't find that certificate");
         }
 
         return ResponseEntity.ok()
