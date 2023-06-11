@@ -1,8 +1,8 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { AircraftUser } from "@/pages/types";
-
 import { type User } from "next-auth";
+
+import { AircraftUser } from "@/pages/types";
 
 let returnedUser: AircraftUser; // I cry
 
