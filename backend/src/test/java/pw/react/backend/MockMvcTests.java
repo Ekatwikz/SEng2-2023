@@ -22,8 +22,6 @@ public class MockMvcTests {
     @Autowired
     private MockMvc mockMvc;
 
-    private final String baseUrl = "";
-
     @Test
     public void registrationShouldReturnValidResponse() throws Exception {
 	// Setup Dto
@@ -35,7 +33,7 @@ public class MockMvcTests {
 	newUser.setEmail("testing@example.com");
 
 	// POST Dto and assert that the response is as expected
-	mockMvc.perform(post(baseUrl + "/registration")
+	mockMvc.perform(post("/registration")
 	    .contentType(MediaType.APPLICATION_JSON)
 	    .content(new ObjectMapper().writeValueAsString(newUser)))
 	    .andExpect(status().isCreated())
@@ -45,44 +43,4 @@ public class MockMvcTests {
 	    .andExpect(jsonPath("$.firstName").value(newUser.getFirstName()))
 	    .andExpect(jsonPath("$.lastName").value(newUser.getLastName()));
     }
-
-    // @Test
-    // public void loginShouldWork() {
-    // 	// TODO
-    // }
-
-    // @Test
-    // public void bookingCreationShouldWork() {
-    // 	// TODO
-    // }
-
-    // @Test
-    // public void bookingUpdatesShouldWork() {
-    // 	// TODO
-    // }
-
-    // @Test
-    // public void certificateCreationShouldWork() {
-    // 	// TODO
-    // }
-
-    // @Test
-    // public void certificateRetrievalShouldWork() {
-    // 	// TODO
-    // }
-
-    // @Test
-    // public void aircraftCreationShouldWork() {
-    // 	// TODO
-    // }
-
-    // @Test
-    // public void aircraftRetrievalShouldWork() {
-    // 	// TODO
-    // }
-
-    // @Test
-    // public void aircraftRetrievalByTimeRangeShouldWork() {
-    // 	// TODO
-    // }
 }
