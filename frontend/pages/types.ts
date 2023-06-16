@@ -47,4 +47,15 @@ type Booking = {
   bookingEndDateTime: Dayjs
 }
 
-export { type AircraftUser, type Aircraft, type AircraftImage, type RegisterData, type BookData, type Booking };
+type CertificateInfo = {
+  certificateId: number,
+  certificateName: string,
+  expiryDate: string,
+  ownerId: number,
+  fileName: string,
+  fileSize: number,
+  fileType: string,
+  certificateFile: string,
+}
+
+export { type AircraftUser, type Aircraft, type AircraftImage, type RegisterData, type BookData, type Booking, type CertificateInfo };

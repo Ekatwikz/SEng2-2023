@@ -6,6 +6,9 @@ import { SnackbarProvider } from "notistack";
 import Layout from "../components/layout";
 import { SessionProvider } from "../node_modules/next-auth/react";
 
+import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
@@ -19,14 +22,16 @@ export default function App({ Component,
   console.log(session);
   return (
     <SessionProvider session={session}>
-      <ThemeProvider theme={theme}>
-        <SnackbarProvider maxSnack={2}>
-          <Layout>
-            <CssBaseline />
-            <Component {...pageProps} />
-          </Layout>
-        </SnackbarProvider>
-      </ThemeProvider>
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <ThemeProvider theme={theme}>
+          <SnackbarProvider maxSnack={2}>
+            <Layout>
+              <CssBaseline />
+              <Component {...pageProps} />
+            </Layout>
+          </SnackbarProvider>
+        </ThemeProvider>
+      </LocalizationProvider>
     </SessionProvider>
   );
 }

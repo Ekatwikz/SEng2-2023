@@ -32,6 +32,7 @@
     "react-bootstrap": "^2.7.2",
     "react-dom": "18.2.0",
     "typescript": "5.0.2",
+    "use-file-picker": "^1.7.0",
     "yup": "^1.0.2"
   }
 }
