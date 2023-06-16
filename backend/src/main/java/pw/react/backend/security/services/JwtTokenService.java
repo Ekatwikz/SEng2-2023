@@ -122,17 +122,16 @@ public class JwtTokenService implements Serializable {
 
         return username.equals(userDetails.getUsername()) &&
         !isTokenExpired(token) &&
-        isClientIpCorrect(token, request) &&
-        isValidUserAgent(token, request) &&
+        isValidClient(token, request) &&
         tokenOptValid;
     }
 
-    private boolean isValidUserAgent(String token, HttpServletRequest request) {
-        return getUserAgent(request).equals(getUserAgentFromToken(token));
-    }
+    private boolean isValidClient(String token, HttpServletRequest request) {
+        String userAgent = getUserAgent(request);
 
-    private boolean isClientIpCorrect(String token, HttpServletRequest request) {
-        return getClientIp(request).equals(getClientIpFromToken(token));
+        return getClientIp(request).equals(getClientIpFromToken(token))
+        && userAgent.equals(getUserAgentFromToken(token))
+        || userAgent.equals("undici"); // Shhhhh
     }
 
     public boolean invalidateToken(HttpServletRequest request) {

@@ -18,6 +18,10 @@ export default function Navbar() {
                     <Tab label="Home" />
                 </Link>
 
+                <Link href="/aircrafts">
+                    <Tab label="Aircrafts" />
+                </Link>
+
                 <Link href="/profile">
                     <Avatar className='logo' sx={{ m: 1, bgcolor: "grey" }}>
                         <FaceIcon />

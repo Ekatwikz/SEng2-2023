@@ -6,23 +6,7 @@ import { useSnackbar } from "notistack";
 import { auth } from "./api/auth/register";
 import { signIn } from "next-auth/react";
 
-export class RegisterData {
-    firstName: string;
-    lastName: string;
-    email: string;
-    username: string;
-    password: string;
-    passwordRep: string;
-
-    constructor(firstName: string, lastName: string, email: string, username: string, password: string, passwordRep: string) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.username = username;
-        this.password = password;
-        this.passwordRep = passwordRep;
-    }
-}
+import { RegisterData } from "./types";
 
 export default function Register() {
   const { enqueueSnackbar } = useSnackbar();
@@ -32,14 +16,14 @@ export default function Register() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
-    const result = new RegisterData(
-      data.get("firstName")!.toString(),
-      data.get("lastName")!.toString(),
-      data.get("email")!.toString(),
-      data.get("username")!.toString(),
-      data.get("password")!.toString(),
-      data.get("passwordRep")!.toString(),
-    );
+    const result: RegisterData = {
+      firstName: data.get("firstName")!.toString(),
+      lastName: data.get("lastName")!.toString(),
+      email: data.get("email")!.toString(),
+      username: data.get("username")!.toString(),
+      password: data.get("password")!.toString(),
+      passwordRep: data.get("passwordRep")!.toString(),
+    };
 
     if (await auth(result)) {
         await signIn("credentials", {
