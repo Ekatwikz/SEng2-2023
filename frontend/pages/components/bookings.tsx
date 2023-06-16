@@ -1,7 +1,7 @@
 import { Container, Card, Typography, Stack, Box, Avatar, Grid} from "@mui/material";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
-import AirplanemodeActiveIcon from '@mui/icons-material/AirplanemodeActive';
+import AirplanemodeActiveIcon from "@mui/icons-material/AirplanemodeActive";
 import { Aircraft, AircraftUser, Booking } from "../types";
 
 export default function Bookings() {
@@ -61,7 +61,7 @@ export default function Bookings() {
                         <Grid container columns={2} display="flex" flexDirection="row" alignItems="space-between" spacing={20}>
                             <Grid item>
                                 <Box sx={{ p: 2, display: "flex", flexDirection: "row", alignItems: "left" }}>
-                                    <Avatar className='logo' sx={{ m: 2, bgcolor: "grey" }}>
+                                    <Avatar className="logo" sx={{ m: 2, bgcolor: "grey" }}>
                                         <AirplanemodeActiveIcon />
                                     </Avatar>
                                     <Stack spacing={0.5}>
