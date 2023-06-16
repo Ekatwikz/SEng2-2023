@@ -1,3 +1,5 @@
+import { Dayjs } from "dayjs";
+
 type AircraftUser = {
   id: number,
   username: string,
@@ -15,6 +17,14 @@ type Aircraft = {
   aircraftDescription: string,
 };
 
+type AircraftImage = {
+  aircraftId: number,
+  aircraftImageId: number,
+  fileName: string,
+  fileType: string,
+  fileSize: number,
+};
+
 type RegisterData = {
   firstName: string,
   lastName: string,
@@ -24,4 +34,17 @@ type RegisterData = {
   passwordRep: string,
 };
 
-export { type AircraftUser, type Aircraft, type RegisterData };
+type BookData = {
+  aircraftId: number,
+  bookingStartDateTime: Dayjs | null,
+  bookingEndDateTime: Dayjs | null
+}
+
+type Booking = {
+  bookingId: number,
+  aircraftId: number,
+  bookingStartDateTime: Dayjs,
+  bookingEndDateTime: Dayjs
+}
+
+export { type AircraftUser, type Aircraft, type AircraftImage, type RegisterData, type BookData, type Booking };

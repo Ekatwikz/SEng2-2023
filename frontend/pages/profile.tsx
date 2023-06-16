@@ -7,6 +7,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Avatar, Box, Button, Card, Container, Divider, Grid, MenuItem, MenuList, Stack, Typography } from "@mui/material";
 
 import { AircraftUser } from "./types";
+import Bookings from "./components/bookings";
 
 export default function About() {
   const { data: session } = useSession();
@@ -49,7 +50,7 @@ export default function About() {
           </Box>
           <Divider style={{ borderBottom: "0.01em solid lightgray"}}/>
           <Grid container spacing={2}>
-            <Grid item xs={4}>
+            <Grid item xs={2}>
               <Stack
                 direction="row"
                 alignItems="center"
@@ -66,8 +67,8 @@ export default function About() {
                 </MenuList>
               </Stack>
             </Grid>
-            <Grid item xs={8}>
-              {/* {subPage === "Bookings" ? <Bookings/> : <Certificates/>} */}
+            <Grid item xs={10}>
+              {subPage === "Bookings" ? <Bookings/> : <></>}
             </Grid>
           </Grid>
         </Box>
